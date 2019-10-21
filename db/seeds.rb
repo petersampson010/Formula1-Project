@@ -15,10 +15,10 @@ team_two   = Constructor.create(name: "McLaren", nationality: "UK")
 #seed drivers
 #id :first_name :second_name :nationality :age
 
-driver_one   = Driver.create(first_name: "Mike",    last_name: "Mueller",   nationality: "Germany", age: 32)
-driver_two   = Driver.create(first_name: "John",    last_name: "Mueller",   nationality: "Germany", age: 33)
-driver_three = Driver.create(first_name: "Steven",  last_name: "Stevenson", nationality: "Sweden",  age: 32)
-driver_four  = Driver.create(first_name: "Tom",     last_name: "Tompson",   nationality: "UK",      age: 29)
+driver_one   = Driver.create(first_name: "Mike",    second_name: "Mueller",   nationality: "Germany", age: 32)
+driver_two   = Driver.create(first_name: "John",    second_name: "Mueller",   nationality: "Germany", age: 33)
+driver_three = Driver.create(first_name: "Steven",  second_name: "Stevenson", nationality: "Sweden",  age: 32)
+driver_four  = Driver.create(first_name: "Tom",     second_name: "Tompson",   nationality: "UK",      age: 29)
 
 #assign drivers to teams
 driver_one.constructor = team_one
