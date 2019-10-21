@@ -15,8 +15,7 @@ ActiveRecord::Schema.define(version: 4) do
   create_table "constructors", force: :cascade do |t|
     t.string "name"
     t.string "nationality"
-    t.integer "driver_one_id"
-    t.integer "driver_two_id"
+    t.float "tech_factor"
   end
 
   create_table "drivers", force: :cascade do |t|
@@ -24,6 +23,9 @@ ActiveRecord::Schema.define(version: 4) do
     t.string "second_name"
     t.string "nationality"
     t.integer "age"
+    t.string "constructor_id"
+    t.integer "price"
+    t.float "skill_factor"
   end
 
   create_table "finishing_positions", force: :cascade do |t|

@@ -6,6 +6,9 @@ class CreateDriver < ActiveRecord::Migration[5.2]
             t.string :second_name
             t.string :nationality
             t.integer :age
+            t.string :constructor_id
+            t.integer :price
+            t.float :skill_factor
         end 
     end 
 end 
