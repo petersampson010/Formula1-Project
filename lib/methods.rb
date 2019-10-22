@@ -17,22 +17,39 @@ def pre_season
     select_drivers
 end
 
-
-
-def return_a_leaderboard
-#
-# 
+def earned_points_per_position(position)
+  case position
+  when 1
+    25
+  when 2
+    18
+  when 3
+    12
+  when 4
+    10
+  when 5
+    8
+  when 6
+    4
+  when 7
+    2
+  when 8..10
+    1
+  else
+    0
+  end
 end
 
-def between_race
-# options to improve driver/car
-# options to see stats on season 
+## RUN THE SEASON
+
+def create_results(race)
+  race.run_race(Driver.all)
 end
 
-def get_ranking(race)
-  r = FinishingPosition.all.select { |race| race.id ==race.id }.sort_by { |fp| fp.final_position }
-# should return an array of arrays [position, driver_name]
+def show_ranking(race)
+  race.print_ranking(Driver.all)
 end
+
 
 
 def new_game 
@@ -101,23 +118,30 @@ def enough_money?
 end 
 
 
-
-
-def season
-
-  # iterate through all races
-  Race.all.each do |race|
-    race.run_race
-   #race_results
-   #return_as_leaderboard
-  end
-# return nil
+def prepare_next_race
+# options to improve driver/car
+# options to see stats on season 
 end
+
+
+def return_a_leaderboard
+end
+
+def run_season
+  # run all races
+  Race.all.each do |race|
+    create_results(race)
+    prepare_for_next_race
+    final_results
+  end
+
+end
+
 
 ## RUN GAME
-##
+##---------
 
-def  play_game 
-    pre_season
-    season
-end
+# def  play_game 
+#     pre_season
+#     season
+# end
