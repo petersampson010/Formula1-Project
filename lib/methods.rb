@@ -1,44 +1,76 @@
-def new_or_load
-    puts "Press N for new game or L for load previous"
-    users_input = gets.strip
-    if users_input == 'n' || 'N'
-        new_game 
-    elsif users_input == 'l' || 'L'
-        load_game 
-    else 
-        new_or_load
-    end 
-end
 
 def new_game 
-    puts "Introduction and explanation of game and how they can select/improve their team, also how they can get help if needed"
-    puts "please enter your team name"
-    team_name = gets.strip
-    **POTENTIAL TO CHANGE NAME IF TEHY MISSPELL**
-    puts "please enter your team nationality"
-    team_nationality = gets.strip 
-    team_name = Constructor.new????create(name: team_name, nationality: team_nationality, tech_factor: 0.1)
-    puts "now its time to pick your drivers!"
+    introduction 
+    create_team
     list_drivers
-    select_drivers 
-    puts "take a look through all the drivers and select two by entering their number: Be careful though, your a new team so only have a starting budget of £100"
-    puts 
+    select_drivers
 end 
 
+def introduction 
+    puts "Formula1-Fantasy"
+    puts "You've just won the lottery! What will you do with it..."
+    puts "Build an F1 Team of course!"
+    puts "Create your team, pick your drivers and you're ready for the new season ahead"
+end 
 
+def create_team 
+    puts "Please enter your team name:"
+    team_name = gets.strip 
+    puts "Please enter the country your team has originated from:"
+    team_nationality = gets.strip
+    Constructor.create(name: team_name, nationality: team_nationality, tech_factor: 0.5)
+    users_team = Constructor.find_by(id: 9)
+end 
 
 def list_drivers 
-    Driver.all.map {|d| puts "#{driver.id}. #{driver.first_name} #{driver.second_name} | #{driver.age} | #{driver.nationality} | #{driver.price}"}
+    puts `clear`
+    puts "Now its time to hire some drivers for your season!" 
+    puts "Every drivers desperate to be on your books but watch out, that lottery fund of £100m will only take you so far and once a drivers signed that contract hes in for the season!"
+    sleep(2)
+    Driver.all.each {|d| puts "#{d.id}. #{d.first_name} #{d.second_name} | Age:#{d.age} | #{d.nationality} | Price:#{d.price}"}
 end 
 
-def select_drivers 
-    puts "take a look through all the drivers and select two by entering their number: Be careful though, your a new team so only have a starting budget of £100"
-    puts "driver1:"
+def pick_driver1
+    puts "Take a look through all the drivers and select one by entering their number:"
     driver1_id = gets.strip 
-#what happens if input is invalid 
     driver1 = Driver.find_by(id: driver1_id)
-    puts "you have selected #{driver1.name}"
-    puts "driver2:"
-    driver2_id = gets.strip
+    puts "Great choice, #{driver1.first_name} has been on fire pre-season! You now have #{14 - driver1.price} to spend on your second driver"
+    driver1
+end 
+
+def pick_driver2
+    driver2_id = gets.strip 
     driver2 = Driver.find_by(id: driver2_id)
+    driver_one = pick_driver1
+    budget = (14 - driver_one.price)
+    if driver2.price > budget 
+        "You havent got enough for this driver, please select again"
+        pick_driver2 
+    else 
+        puts "And there it is, the lineup for #{users_team} is:"
+        puts "#{driver1.id}. #{driver1.first_name} #{driver1.second_name} | #{driver1.age} | #{driver1.nationality} | #{driver1.price}"
+        puts "#{driver2.id}. #{driver2.first_name} #{driver2.second_name} | #{driver2.age} | #{driver2.nationality} | #{driver2.price}"
+    end 
+end 
+
+
+
+def select_drivers 
+    pick_driver1
+    #potentially list_drivers again 
+    pick_driver2
+end 
+
+def enough_money?
+    budget = (14 - pick_driver1.price)
+    if driver2.price > budget 
+        "You havent got enough for this driver, please select again"
+        pick_driver2 
+    else 
+        puts "And there it is, the lineup for #{users_team} is:"
+        puts "#{driver1.id}. #{driver1.first_name} #{driver1.second_name} | #{driver1.age} | #{driver1.nationality} | #{driver1.price}"
+        puts "#{driver2.id}. #{driver2.first_name} #{driver2.second_name} | #{driver2.age} | #{driver2.nationality} | #{driver2.price}"
+    end 
+end 
+
 
