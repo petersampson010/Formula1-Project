@@ -42,12 +42,12 @@ race_two   = Race.create(circuit: "Nurburg Ring",   location: "Germany")
 
 # results
 #:final_position :race_id :driver_id
-fp_1 = FinishingPosition.create(final_position: 1, race_id: 1, driver_id: 1)
-fp_2 = FinishingPosition.create(final_position: 2, race_id: 1, driver_id: 2)
-fp_3 = FinishingPosition.create(final_position: 3, race_id: 1, driver_id: 3)
-fp_4 = FinishingPosition.create(final_position: 4, race_id: 1, driver_id: 4)
+# fp_1 = FinishingPosition.create(final_position: 1, race_id: 1, driver_id: 1)
+# fp_2 = FinishingPosition.create(final_position: 2, race_id: 1, driver_id: 2)
+# fp_3 = FinishingPosition.create(final_position: 3, race_id: 1, driver_id: 3)
+# fp_4 = FinishingPosition.create(final_position: 4, race_id: 1, driver_id: 4)
 
-fp_5 = FinishingPosition.create(final_position: 1, race_id: 2, driver_id: 4)
-fp_6 = FinishingPosition.create(final_position: 2, race_id: 2, driver_id: 3)
-fp_7 = FinishingPosition.create(final_position: 3, race_id: 2, driver_id: 2)
-fp_8 = FinishingPosition.create(final_position: 4, race_id: 2, driver_id: 1)
+# fp_5 = FinishingPosition.create(final_position: 1, race_id: 2, driver_id: 4)
+# fp_6 = FinishingPosition.create(final_position: 2, race_id: 2, driver_id: 3)
+# fp_7 = FinishingPosition.create(final_position: 3, race_id: 2, driver_id: 2)
+# fp_8 = FinishingPosition.create(final_position: 4, race_id: 2, driver_id: 1)

@@ -25,11 +25,11 @@ def between_race
 # options to see stats on season 
 end
 
-def get_ranking(race)
-  fps_sorted = FinishingPosition.all.find_by { race.id == race.id }.sort_by { |fp| fp.final_position }
-  result = fps_sorted.map { |fp| [fp.final_position, fp.driver] }
-# should return an array of arrays [position, driver_name]
-end
+# def get_ranking(race)
+#   fps_sorted = FinishingPosition.all.find_by { race.id == race.id }.sort_by { |fp| fp.final_position }
+#   result = fps_sorted.map { |fp| [fp.final_position, fp.driver] }
+# # should return an array of arrays [position, driver_name]
+# end
 
 def return_a_leaderboard
   #
