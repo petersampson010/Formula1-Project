@@ -58,7 +58,7 @@ def driver_two_selection(users_team)
 end 
 
 def enough_money?(users_team, driver)
-    if users_team.budget > driver.price 
+    if users_team.budget >= driver.price 
         return true 
     else 
         return false 
