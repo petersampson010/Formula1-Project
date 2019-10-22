@@ -1,5 +1,3 @@
-require 'pry'
-
 class Driver < ActiveRecord::Base
 
   belongs_to :constructor
@@ -19,7 +17,7 @@ class Driver < ActiveRecord::Base
   def self.show_standings
     puts 'Rank - Driver - Points - Wins'
     Driver.ranked_driver_points.each_with_index do |standing, index|
-      puts "#{index+1}. #{standing[1].name} #{standing[0]} #{standing[1].wins}"
+      puts "#{index + 1}. #{standing[1].name} #{standing[0]} #{standing[1].wins}"
     end
   end
 
@@ -29,7 +27,7 @@ class Driver < ActiveRecord::Base
 
   def positions
     # gets all positions in races for instance
-    finishing_positions.map {|fp| fp.final_position }
+    finishing_positions.map(&:position)
     # returns an array of positions
   end
 
