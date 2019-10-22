@@ -27,9 +27,9 @@ def between_race
 # options to see stats on season 
 end
 
-def race_results
-# show results
-# update points/scores
+def get_ranking(race)
+  r = FinishingPosition.all.select { |race| race.id ==race.id }.sort_by { |fp| fp.final_position }
+# should return an array of arrays [position, driver_name]
 end
 
 
