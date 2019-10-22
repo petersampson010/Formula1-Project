@@ -25,22 +25,23 @@ end
 def between_race
 # options to improve driver/car
 # options to see stats on season 
-end 
+end
 
 def race_results
 # show results
 # update points/scores
-end 
-
-def run_race
-    
 end
 
+
+
 def season
+
   # iterate through all races
-  race_results
-# play 10 rounds, where rounds include a race and changes you can make between races
-return_as_leaderboard
+  Race.all.each do |race|
+    race.run_race
+   #race_results
+   #return_as_leaderboard
+  end
 # return nil
 end
 
