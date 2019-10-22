@@ -1,7 +1,7 @@
 
 def new_game 
     introduction 
-    create_team
+    team_id = create_team
     list_drivers
     select_drivers
 end 
@@ -18,8 +18,9 @@ def create_team
     team_name = gets.strip 
     puts "Please enter the country your team has originated from:"
     team_nationality = gets.strip
-    Constructor.create(name: team_name, nationality: team_nationality, tech_factor: 0.5)
-    users_team = Constructor.find_by(id: 9)
+    team = Constructor.create(name: team_name, nationality: team_nationality, tech_factor: 0.5)
+    team.id
+    #users_team = Constructor.find_by(id: 9)
 end 
 
 def list_drivers 
@@ -30,30 +31,20 @@ def list_drivers
     Driver.all.each {|d| puts "#{d.id}. #{d.first_name} #{d.second_name} | Age:#{d.age} | #{d.nationality} | Price:#{d.price}"}
 end 
 
+def my_team
+    Constructor.find_by(id: 9)
+end 
+
 def pick_driver1
-    puts "Take a look through all the drivers and select one by entering their number:"
-    driver1_id = gets.strip 
-    driver1 = Driver.find_by(id: driver1_id)
-    puts "Great choice, #{driver1.first_name} has been on fire pre-season! You now have #{14 - driver1.price} to spend on your second driver"
-    driver1
+    Constructor.find_by(id: team_id).pick_driver
 end 
 
 def pick_driver2
+    puts "choose your second driver"
     driver2_id = gets.strip 
     driver2 = Driver.find_by(id: driver2_id)
-    driver_one = pick_driver1
-    budget = (14 - driver_one.price)
-    if driver2.price > budget 
-        "You havent got enough for this driver, please select again"
-        pick_driver2 
-    else 
-        puts "And there it is, the lineup for #{users_team} is:"
-        puts "#{driver1.id}. #{driver1.first_name} #{driver1.second_name} | #{driver1.age} | #{driver1.nationality} | #{driver1.price}"
-        puts "#{driver2.id}. #{driver2.first_name} #{driver2.second_name} | #{driver2.age} | #{driver2.nationality} | #{driver2.price}"
-    end 
+    enough_money?
 end 
-
-
 
 def select_drivers 
     pick_driver1
@@ -62,7 +53,7 @@ def select_drivers
 end 
 
 def enough_money?
-    budget = (14 - pick_driver1.price)
+    budget = (14 - driver1.price)
     if driver2.price > budget 
         "You havent got enough for this driver, please select again"
         pick_driver2 
