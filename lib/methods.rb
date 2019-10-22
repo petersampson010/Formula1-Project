@@ -17,10 +17,7 @@ end
 
 
 
-def return_a_leaderboard
-#
-# 
-end
+
 
 def between_race
 # options to improve driver/car
@@ -28,10 +25,15 @@ def between_race
 end
 
 def get_ranking(race)
-  r = FinishingPosition.all.select { |race| race.id ==race.id }.sort_by { |fp| fp.final_position }
+  fps_sorted = FinishingPosition.all.find_by { race.id == race.id }.sort_by { |fp| fp.final_position }
+  result = fps_sorted.map { |fp| [fp.final_position, fp.driver] }
 # should return an array of arrays [position, driver_name]
 end
 
+def return_a_leaderboard
+  #
+  # 
+end
 
 
 def season
