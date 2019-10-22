@@ -38,8 +38,7 @@ end
 
 
 def season
-
-  # iterate through all races
+  # run all races
   Race.all.each do |race|
     race.run_race
    #race_results
