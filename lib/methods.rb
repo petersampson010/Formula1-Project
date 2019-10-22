@@ -11,13 +11,13 @@ end
 def select_drivers 
 end 
 
-def pre_season 
+def pre_season
     new_or_load_game
     list_drivers
     select_drivers
 end
 
-def earned_points_per_position(position)
+def points_per_position(position)
   case position
   when 1
     25
@@ -40,17 +40,20 @@ def earned_points_per_position(position)
   end
 end
 
-## RUN THE SEASON
+# RUN THE SEASON
+#----------------
 
 def create_race_results(race)
   race.run_race(Driver.all)
 end
 
-def show_ranking(race)
+def show_driver_ranking(race)
   race.print_ranking(Driver.all)
 end
 
-
+def show_current_driver_standings
+  Driver.all.show_standings
+end
 
 def new_game 
     introduction 
@@ -124,15 +127,13 @@ def prepare_next_race
 end
 
 
-def return_a_leaderboard
-end
-
 def run_season
   # run all races
   Race.all.each do |race|
     create_race_results(race)
-    prepare_for_next_race
-    final_results
+
+    #prepare_for_next_race
+    #final_results
   end
 
 end
