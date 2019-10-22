@@ -4,6 +4,14 @@ class Race < ActiveRecord::Base
   has_many :drivers, through: :finishing_positions
   has_many :finishing_positions
 
+  def self.points_by(driver)
+    Driver.all.find_by
+  end
+
+  def self.overall_ranking
+
+  end
+
   def determine_racescore(driver)
     # creates a race score for a drive
     skill = driver.skill_factor
@@ -18,14 +26,14 @@ class Race < ActiveRecord::Base
     # returns an array of arrays [score, driver instance]
   end
 
-  def sorted_racescores(drivers)
+  def sort_scorecards(drivers)
     # gets racescore for drivers and sorts them
     scorecards(drivers).sort { |a, b| a[0] <=> b[0] }
     # returns an sorted array of arrays [score, driver instance]
   end
 
   def get_ranking(drivers)
-    sorted_racescores(drivers).each_with_index.map do |scorecard, index|
+    sort_scorecards(drivers).each_with_index.map do |scorecard, index|
       [index + 1, scorecard[1]]
     end
     # returns an array of arrays [position, driver instance]
@@ -33,7 +41,7 @@ class Race < ActiveRecord::Base
 
   def print_ranking(drivers)
     # iterates through ranking and prints each rank with position and lastname
-      get_ranking(drivers).each do |rank|
+    get_ranking(drivers).each do |rank|
       puts "#{rank[0]}. #{rank[1].name}"
     end
   end
@@ -46,6 +54,5 @@ class Race < ActiveRecord::Base
     end
 
   end
-
 
 end 
