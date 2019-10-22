@@ -9,6 +9,7 @@ class Race < ActiveRecord::Base
     sorted_sb.each_with_index do |scorecard, index|
     fp = FinishingPosition.create(final_position: index + 1, driver_id: scorecard[1].id, race_id: race.id)
     race.finishing_positions << fp
-  end
+    end
+ end
 
 end 
