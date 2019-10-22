@@ -1,3 +1,4 @@
+
 #METHOD
 
 def new_or_load_game
@@ -46,10 +47,9 @@ def season
 end
 
 ## RUN GAME
-##================
+##
 
 def  play_game 
     pre_season
     season
 end
-
