@@ -32,7 +32,7 @@ Driver.create(first_name: "Nico", second_name: "Hulkenberg", nationality: "Germa
 Driver.create(first_name: "Daniel", second_name: "Ricciardo", nationality: "Australia", age: 30, constructor_id: 5, price: 8, skill_factor: 8)
 Driver.create(first_name: "Romain", second_name: "Grosjean", nationality: "France", age: 33, constructor_id: 6, price: 5, skill_factor: 5)
 Driver.create(first_name: "Kevin", second_name: "Magnussen", nationality: "Denmark", age: 27, constructor_id: 6, price: 6, skill_factor: 6)
-Driver.create(first_name: "Daniil", second_name: "Kvyat", nationality: "Russia", age: 25, constructor_id: 7, price: 5, skill_factor: 4)
+Driver.create(first_name: "Daniil", second_name: "Kvyat", nationality: "Russia", age: 25, constructor_id: 7, price: 4, skill_factor: 4)
 Driver.create(first_name: "Pierre", second_name: "Gasly", nationality: "France", age: 23, constructor_id: 7, price: 7, skill_factor: 7)
 Driver.create(first_name: "Kimi", second_name: "Raikkonen", nationality: "Finland", age: 40, constructor_id: 8, price: 6, skill_factor: 6)
 Driver.create(first_name: "Antonio", second_name: "Giovinazzi", nationality: "Italy", age: 25, constructor_id: 8, price: 5, skill_factor: 5)
