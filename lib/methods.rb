@@ -42,7 +42,7 @@ end
 
 ## RUN THE SEASON
 
-def create_results(race)
+def create_race_results(race)
   race.run_race(Driver.all)
 end
 
@@ -130,7 +130,7 @@ end
 def run_season
   # run all races
   Race.all.each do |race|
-    create_results(race)
+    create_race_results(race)
     prepare_for_next_race
     final_results
   end

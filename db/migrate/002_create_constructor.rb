@@ -4,7 +4,7 @@ class CreateConstructor < ActiveRecord::Migration[5.2]
         create_table :constructors do |t|
             t.string :name 
             t.string :nationality
-            t.float :tech_factor
+            t.float  :tech_factor
         end 
     end 
 end 
