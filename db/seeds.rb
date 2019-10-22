@@ -37,10 +37,10 @@ team_two.drivers << driver_four
 #:id :circuit :location
 race_one   = Race.create(circuit: "Silverstone",    location: "UK")
 race_two   = Race.create(circuit: "Nurburg Ring",   location: "Germany")
-#race_three = Race.create(circuit: "Circuit de Monaco", location: "Monaco")
-#race_four  = Race.create(circuit: "Suzuka Circuit", location: "Japan")
+# race_three = Race.create(circuit: "Circuit de Monaco", location: "Monaco")
+# race_four  = Race.create(circuit: "Suzuka Circuit", location: "Japan")
 
-#results
+# results
 #:final_position :race_id :driver_id
 fp_1 = FinishingPosition.create(final_position: 1, race_id: 1, driver_id: 1)
 fp_2 = FinishingPosition.create(final_position: 2, race_id: 1, driver_id: 2)
