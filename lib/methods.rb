@@ -32,18 +32,20 @@ def race_results
 # update points/scores
 end 
 
+def run_race
+    
+end
 
 def season
-    #iterate through all races
-    race_results
-    
+  # iterate through all races
+  race_results
 # play 10 rounds, where rounds include a race and changes you can make between races
 return_as_leaderboard
 # return nil
 end
 
-
-##RUN GAME
+## RUN GAME
+##================
 
 def  play_game 
     pre_season
