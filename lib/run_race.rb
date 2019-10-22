@@ -15,7 +15,3 @@ def create_drivers_scoreboard(drivers)
   drivers.map { |driver| [determine_racescore_for_driver(driver), driver] }
   # returns an array of arrays [score, driver instance]
 end
-
-
-  # returns nil
-end
