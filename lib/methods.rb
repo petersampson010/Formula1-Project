@@ -34,8 +34,8 @@ def select_drivers(users_team)
     driver_one_selection(users_team)
     driver_two_selection(users_team)
     puts "And there it is, the lineup for #{users_team.name} is:"
-    puts "#{driver1.first_name} #{driver1.second_name}"
-    puts "#{driver2.first_name} #{driver2.second_name}"
+    puts "#{users_team.drivers[0].first_name} #{users_team.drivers[0].second_name}"
+    puts "#{users_team.drivers[1].first_name} #{users_team.drivers[1].second_name}"
 end 
 
 def driver_one_selection(users_team)
