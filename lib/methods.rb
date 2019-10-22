@@ -31,28 +31,37 @@ def list_drivers
 end 
 
 def select_drivers(users_team) 
-    "please select the number of the driver you'd like to join your team:"
-    driver1_id = gets.strip 
-    driver1 = Driver.find_by(id: driver1_id)
-    users_team.pick_driver(driver1)
-    puts "Great choice! #{driver1.first_name} has been on fire pre-season. You have #{14 - driver1.price} left for your next driver:"
-    driver2_id = gets.strip 
-    driver2 = Driver.find_by(id: driver2_id)
-    users_team.pick_driver(driver2)
+    driver_one_selection(users_team)
+    driver_two_selection(users_team)
     puts "And there it is, the lineup for #{users_team.name} is:"
     puts "#{driver1.first_name} #{driver1.second_name}"
     puts "#{driver2.first_name} #{driver2.second_name}"
 end 
 
-def enough_money?
-    budget = (14 - driver1.price)
-    if driver2.price > budget 
-        "You havent got enough for this driver, please select again"
-        pick_driver2 
+def driver_one_selection(users_team)
+    "please select the number of the driver you'd like to join your team:"
+    driver1_id = gets.strip 
+    driver1 = Driver.find_by(id: driver1_id)
+    users_team.pick_driver(driver1)
+    puts "Great choice! #{driver1.first_name} has been on fire pre-season. You have #{users_team.budget} left for your next driver:"
+end 
+
+def driver_two_selection(users_team)
+    driver2_id = gets.strip 
+    driver2 = Driver.find_by(id: driver2_id)
+    if enough_money?(users_team, driver2)
+        users_team.pick_driver(driver2)
     else 
-        puts "And there it is, the lineup for #{users_team} is:"
-        puts "#{driver1.id}. #{driver1.first_name} #{driver1.second_name} | #{driver1.age} | #{driver1.nationality} | #{driver1.price}"
-        puts "#{driver2.id}. #{driver2.first_name} #{driver2.second_name} | #{driver2.age} | #{driver2.nationality} | #{driver2.price}"
+        puts "You havent got the money for this driver, please select again:"
+        driver_two_selection(users_team)
+    end 
+end 
+
+def enough_money?(users_team, driver)
+    if users_team.budget > driver.price 
+        return true 
+    else 
+        return false 
     end 
 end 
 
