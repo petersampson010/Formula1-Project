@@ -3,6 +3,7 @@ class Constructor < ActiveRecord::Base
     has_many :drivers
 
     def pick_driver 
+        
     end 
 
     # def pick_driver1
