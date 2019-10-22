@@ -1,53 +1,50 @@
+
 #Clear all instances
 Driver.delete_all
 Race.delete_all
 Constructor.delete_all
 FinishingPosition.delete_all
 
-#seed constructors
-#:id :name :nationality :driver_one_id :driver_two_id
 
-team_one   = Constructor.create(name: "Ferrari", nationality: "Italy", tech_factor: 1)
-team_two   = Constructor.create(name: "McLaren", nationality: "UK",  tech_factor: 1)
-#team_three = Constructor.create(name: "Mercedes", nationality: "Germany")
-#team_four  = Constructor.create(name: "Willimans", nationality: "TBC")
+require_relative '../lib/constructor.rb'
+require_relative '../lib/driver.rb'
+require_relative '../lib/race.rb'
 
-#seed drivers
-#id :first_name :second_name :nationality :age
 
-driver_one   = Driver.create(first_name: "Mike",    second_name: "Mueller",   nationality: "Germany", age: 32, price: 100, skill_factor: 1)
-driver_two   = Driver.create(first_name: "John",    second_name: "Mueller",   nationality: "Germany", age: 33, price: 100, skill_factor: 1)
-driver_three = Driver.create(first_name: "Steven",  second_name: "Stevenson", nationality: "Sweden",  age: 32, price: 100, skill_factor: 1)
-driver_four  = Driver.create(first_name: "Tom",     second_name: "Tompson",   nationality: "UK",      age: 29, price: 100, skill_factor: 1)
+Constructor.create(name: "Mercedes", nationality: "Germany", tech_factor: 1)
+Constructor.create(name: "Ferrari", nationality: "Italy", tech_factor: 0.9)
+Constructor.create(name: "Red Bull", nationality: "Austria", tech_factor: 0.8)
+Constructor.create(name: "McLaren", nationality: "Britain", tech_factor: 0.6)
+Constructor.create(name: "Renault", nationality: "France", tech_factor: 0.6)
+Constructor.create(name: "Haas", nationality: "USA", tech_factor: 0.6)
+Constructor.create(name: "Toro Rosso", nationality: "Italy", tech_factor: 0.4)
+Constructor.create(name: "Alfa Romeo", nationality: "Switzerland", tech_factor: 0.4)
 
-#assign drivers to teams
-driver_one.constructor = team_one
-driver_two.constructor = team_one
+Driver.create(first_name: "Lewis", second_name: "Hamilton", nationality: "Britain", age: 34, constructor_id: 1, price: 10, skill_factor: 10)
+Driver.create(first_name: "Valtteri", second_name: "Bottas", nationality: "Iceland", age: 30, constructor_id: 1, price: 7, skill_factor: 7)
+Driver.create(first_name: "Sebastian", second_name: "Vettel", nationality: "Germany", age: 32, constructor_id: 2, price: 9, skill_factor: 9)
+Driver.create(first_name: "Charles", second_name: "Leclerc", nationality: "France", age: 22, constructor_id: 2, price: 7, skill_factor: 7)
+Driver.create(first_name: "Max", second_name: "Verstappen", nationality: "Netherlands", age: 22, constructor_id: 3, price: 8, skill_factor: 8)
+Driver.create(first_name: "Alexander", second_name: "Albon", nationality: "Thailand", age: 23, constructor_id: 3, price: 6, skill_factor: 6)
+Driver.create(first_name: "Carlos", second_name: "Sainz", nationality: "Spain", age: 25, constructor_id: 4, price: 5, skill_factor: 5)
+Driver.create(first_name: "Lando", second_name: "Norris", nationality: "Britain", age: 19, constructor_id: 4, price: 6, skill_factor: 6)
+Driver.create(first_name: "Nico", second_name: "Hulkenberg", nationality: "Germany", age: 32, constructor_id: 5, price: 7, skill_factor: 7)
+Driver.create(first_name: "Daniel", second_name: "Ricciardo", nationality: "Australia", age: 30, constructor_id: 5, price: 8, skill_factor: 8)
+Driver.create(first_name: "Romain", second_name: "Grosjean", nationality: "France", age: 33, constructor_id: 6, price: 5, skill_factor: 5)
+Driver.create(first_name: "Kevin", second_name: "Magnussen", nationality: "Denmark", age: 27, constructor_id: 6, price: 6, skill_factor: 6)
+Driver.create(first_name: "Daniil", second_name: "Kvyat", nationality: "Russia", age: 25, constructor_id: 7, price: 5, skill_factor: 5)
+Driver.create(first_name: "Pierre", second_name: "Gasly", nationality: "France", age: 23, constructor_id: 7, price: 7, skill_factor: 7)
+Driver.create(first_name: "Kimi", second_name: "Raikkonen", nationality: "Finland", age: 40, constructor_id: 8, price: 6, skill_factor: 6)
+Driver.create(first_name: "Antonio", second_name: "Giovinazzi", nationality: "Italy", age: 25, constructor_id: 8, price: 5, skill_factor: 5)
 
-team_one.drivers << driver_one
-team_one.drivers << driver_two
+Race.create(circuit: "Melbourne Circuit", location: "Melbourne, Australia")
+Race.create(circuit: "Bahrain International Circuit", location: "Bahrain")
+Race.create(circuit: "Baku City Circuit", location: "Baku, Azerbaijan")
+Race.create(circuit: "Circuit de Barcelona-Catalunya", location: "Barcelona, Spain")
+Race.create(circuit: "Circuit de Monaco", location: "Monaco")
+Race.create(circuit: "Red Bull Ring", location: "Styria, Austria")
+Race.create(circuit: "Silverstone Circuit", location: "Towchester, England")
+Race.create(circuit: "Hungaroring", location: "Mogyorod, Hungary")
+Race.create(circuit: "Marina Bay Street Circuit", location: "Marina Bay, Singapore")
+Race.create(circuit: "Suzuka International Racing Course", location: "Suzuka, Japan")
 
-driver_three.constructor = team_two
-driver_four.constructor = team_two
-
-team_two.drivers << driver_three
-team_two.drivers << driver_four
-
-#seed races
-#:id :circuit :location
-race_one   = Race.create(circuit: "Silverstone",    location: "UK")
-race_two   = Race.create(circuit: "Nurburg Ring",   location: "Germany")
-# race_three = Race.create(circuit: "Circuit de Monaco", location: "Monaco")
-# race_four  = Race.create(circuit: "Suzuka Circuit", location: "Japan")
-
-# results
-#:final_position :race_id :driver_id
-fp_1 = FinishingPosition.create(final_position: 1, race_id: 1, driver_id: 1)
-fp_2 = FinishingPosition.create(final_position: 2, race_id: 1, driver_id: 2)
-fp_3 = FinishingPosition.create(final_position: 3, race_id: 1, driver_id: 3)
-fp_4 = FinishingPosition.create(final_position: 4, race_id: 1, driver_id: 4)
-
-fp_5 = FinishingPosition.create(final_position: 1, race_id: 2, driver_id: 4)
-fp_6 = FinishingPosition.create(final_position: 2, race_id: 2, driver_id: 3)
-fp_7 = FinishingPosition.create(final_position: 3, race_id: 2, driver_id: 2)
-fp_8 = FinishingPosition.create(final_position: 4, race_id: 2, driver_id: 1)

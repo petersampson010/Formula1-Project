@@ -8,7 +8,8 @@ play_game
 =======
 
 
-puts "HELLO WORLD"
+new_game 
+
 
 
 >>>>>>> feature1
