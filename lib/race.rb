@@ -47,7 +47,7 @@ class Race < ActiveRecord::Base
   end
 
   def run_race(drivers)
-    # get ranking, save FinishingPositions
+    # get ranking, save FinishingPositions to Database
 
     get_ranking(drivers).each do |rank|
       FinishingPosition.create(final_position: rank[0], driver_id: rank[1].id, race_id: self.id)
