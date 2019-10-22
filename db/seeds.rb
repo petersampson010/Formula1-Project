@@ -1,3 +1,11 @@
+
+#Clear all instances
+Driver.delete_all
+Race.delete_all
+Constructor.delete_all
+FinishingPosition.delete_all
+
+
 require_relative '../lib/constructor.rb'
 require_relative '../lib/driver.rb'
 require_relative '../lib/race.rb'
@@ -39,3 +47,4 @@ Race.create(circuit: "Silverstone Circuit", location: "Towchester, England")
 Race.create(circuit: "Hungaroring", location: "Mogyorod, Hungary")
 Race.create(circuit: "Marina Bay Street Circuit", location: "Marina Bay, Singapore")
 Race.create(circuit: "Suzuka International Racing Course", location: "Suzuka, Japan")
+

@@ -1,0 +1,31 @@
+1. Welcome message 
+2. Load Game or starting new (returning player skip to step 7)
+3. Tell us team name, team nationality ….
+4. Create instance of Constructor
+5. List all possible drivers 
+6. Add drivers selected 
+
+1. Season Breakdown
+2. Run race (x10)
+3. Give results  (x10)
+4. Save data (x10)
+5. Ask user what they would like to do (I.e continue, view data…)
+6. Ask user what they would like to do BREAKDOWN
+7. -
+8. Continue to next race
+9. See driver leaderboard/constructor leaderboard 
+10. Pay for driver lessons (skill factor)
+11. Pay for car improvements (technology factor)
+12. Other methods (things they want to know)
+13. save and leave 
+14. -
+15. *
+16. 
+17. End of Season Option
+
+
+1. Save and leave 
+2. Delete team and start again 
+3. Delete team and leave 
+4. Change drivers - check all drivers stats
+5. 
