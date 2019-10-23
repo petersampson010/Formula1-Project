@@ -1,11 +1,11 @@
 
 
 def new_game 
-    
     introduction 
     users_team = create_team
     list_drivers
     select_drivers(users_team)
+    Driver.reset_drivers_to_teams
 end 
 
 def introduction 

@@ -27,11 +27,11 @@ class Driver < ActiveRecord::Base
       if d.id.even? 
         new_id = d.id/2
         new_constructor = Constructor.find_by(id: new_id)
-        d.constructor = new_constructor 
+        new_constructor.drivers << d
       else 
-        new_id = ((d.id/2).to_f+0.5).to_i
+        new_id = ((d.id/2.0).to_f+0.5).to_i
         new_constructor = Constructor.find_by(id: new_id)
-        d.constructor
+        new_constructor.drivers << d
       end 
     end 
   end 
