@@ -101,8 +101,8 @@ def create_race_results(race)
   race.run_race(Driver.all)
 end
 
-def show_driver_ranking(race)
-  race.print_ranking(Driver.all)
+def show_race_ranking(race)
+  race.show_ranking(Driver.all)
 end
 
 def show_current_driver_standings
@@ -145,6 +145,12 @@ def new_game
   # select_drivers(users_team)
 
   ## season-run
+
+  # run one race
+   race_one = Race.all[0] #dummy race data
+   puts race_one
+   #create_race_results(race)
+   #show_race_ranking(race)
 
 
   #end

@@ -27,7 +27,7 @@ class Driver < ActiveRecord::Base
 
   def positions
     # gets all positions in races for instance
-    finishing_positions.map(&:position)
+    finishing_positions.map(&:final_position)
     # returns an array of positions
   end
 
