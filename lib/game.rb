@@ -52,7 +52,11 @@ class Game < ActiveRecord::Base
         show_drivers
     end 
 
-    def select_drivers 
+    def select_drivers
+        puts "please select the number of the driver you'd like to join your team:"
+
+        puts "Great choice! #{driver1.first_name} has been on fire pre-season. You have #{users_team.budget} left for your next driver:"
+end 
     end 
 
 
@@ -66,13 +70,10 @@ def select_drivers(users_team)
     puts "#{users_team.drivers[1].first_name} #{users_team.drivers[1].second_name}"
 end 
 
-def driver_one_selection(users_team)
-    "please select the number of the driver you'd like to join your team:"
-    driver1_id = gets.strip 
-    driver1 = Driver.find_by(id: driver1_id)
-    users_team.pick_driver(driver1)
-    puts "Great choice! #{driver1.first_name} has been on fire pre-season. You have #{users_team.budget} left for your next driver:"
-end 
+def driver_one_selection
+  driver1 = game_driver[gets.strip - 1]
+  users_team.pick_driver(driver1)
+end
 
 def driver_two_selection(users_team)
     driver2_id = gets.strip
@@ -81,7 +82,7 @@ def driver_two_selection(users_team)
         puts "You cant select the same driver twice!, please try again"
         driver_two_selection(users_team)
     else 
-        driver2 = Driver.find_by(id: driver2_id)
+        driver2 = game_driver.find_by(id: driver2_id)
         if enough_money?(users_team, driver2)
             users_team.pick_driver(driver2)
         else 
