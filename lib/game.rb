@@ -1,9 +1,11 @@
 class Game < ActiveRecord::Base
 
+    attr_reader :our_team_id
+
     has_many :finishing_positions
 
-    @start_budget = 100
-    @start_tech_factor = 0.5
+        @our_team_id = nil
+
 
     def setup_game_data
         seed_data(self.id)
@@ -17,12 +19,20 @@ class Game < ActiveRecord::Base
         team_name = gets.strip 
         puts "Please enter the country your team has originated from:"
         team_nationality = gets.strip
-        current_game.users_team = team_name
-        Constructor.create(name: team_name, nationality: team_nationality, tech_factor: @start_tech_factor, budget: @start_budget, game_id: self.id)
+        our_team = Constructor.create(name: team_name, nationality: team_nationality, tech_factor: 0.5, budget: 100, game_id: self.id)
+        @our_team_id = our_team.id
     end 
 
     def game_drivers 
         Driver.all.select {|d| d.game_id == self.id}
+    end 
+
+    def game_constructors 
+        Constructor.all.select {|c| c.game_id == self.id}
+    end 
+
+    def our_team 
+        game_constructors.select {|c| c.id == @our_team_id}
     end 
 
     def available_drivers 
@@ -33,7 +43,7 @@ class Game < ActiveRecord::Base
         available_drivers.each_with_index.map {|d, index| [index+1, d]}
     end 
 
-    # puts "#{index+1}. #{d.first_name} #{d.second_name} | Age:#{d.age} | #{d.nationality} | Price:#{d.price}"}
+    # puts "#{index+1}. #{d.first_name} #{d.second_name} | Age:#{d.age} | #{d.nationality} | Price:#{d.price}"
     # end 
 
     def show_drivers 
@@ -53,10 +63,37 @@ class Game < ActiveRecord::Base
     end 
 
     def select_drivers 
+        puts "please select the number of the driver you'd like to join your team:"
+        
+       
+
+
     end 
 
+    def driver_one_selection
+        driver1_id = gets.strip
+        driver1 = game_drivers[driver1_id - 1]
+        self.our_team.pick_driver(driver1)
+        puts "Great choice! #{self.our_team.drivers[0].first_name} has been on fire pre-season. You have #{self.our_team.budget} left for your next driver:"
+        driver2_id = gets.strip 
+        until driver2_id != driver1_id do
+            if enough_money? 
+                driver2 = game_drivers[driver2_id - 1]
+                self.our_team.pick_driver(driver2)
+            else 
+                puts "You havent got the money for this driver, please select again:"
+            
 
 
+
+    end 
+
+    def driver_two_selection 
+        driver2_id = gets.strip 
+        if driver2_id == 
+
+        
+    end
 
 def select_drivers(users_team) 
     driver_one_selection(users_team)
@@ -66,18 +103,12 @@ def select_drivers(users_team)
     puts "#{users_team.drivers[1].first_name} #{users_team.drivers[1].second_name}"
 end 
 
-def driver_one_selection(users_team)
-    "please select the number of the driver you'd like to join your team:"
-    driver1_id = gets.strip 
-    driver1 = Driver.find_by(id: driver1_id)
-    users_team.pick_driver(driver1)
-    puts "Great choice! #{driver1.first_name} has been on fire pre-season. You have #{users_team.budget} left for your next driver:"
-end 
+
 
 def driver_two_selection(users_team)
     driver2_id = gets.strip
     binding pry
-    if driver2_id == users_team.drivers[0].id
+    if driver2_id == 
         puts "You cant select the same driver twice!, please try again"
         driver_two_selection(users_team)
     else 
