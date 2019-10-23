@@ -3,6 +3,8 @@ require 'pry'
 # PREPARE GAME
 #-------------------
 
+puts "Hi Pete"
+
 def create_game_instance
   start_bugdet = 100
   Game.create(budget: start_bugdet)
