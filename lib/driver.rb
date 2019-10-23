@@ -43,3 +43,17 @@ class Driver < ActiveRecord::Base
 
 
 end
+  def self.reset_drivers_to_teams
+    Driver.all.each do |d|
+      if d.id.even? 
+        d.constructor_id = d.id/2
+      else 
+        d.constructor_id = (d.id/2)+0.5
+      end 
+    end 
+  end 
+
+  def fill_empty_teams
+  end 
+
+end 

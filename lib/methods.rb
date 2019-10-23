@@ -8,6 +8,13 @@ end
 
 # GAME > PRE-SEASON
 #--------------------
+def new_game 
+    
+    introduction 
+    users_team = create_team
+    list_drivers
+    select_drivers(users_team)
+end 
 
 def introduction 
     puts "Formula1-Fantasy"
@@ -176,6 +183,3 @@ def new_game
 
 
   #end
-
-
-end 

@@ -1,6 +1,7 @@
 class Constructor < ActiveRecord::Base
 
     has_many :drivers
+    has_one :game
 
     def pick_driver(driver)
         self.drivers << driver
