@@ -21,7 +21,7 @@ Constructor.create(name: "Toro Rosso", nationality: "Italy", tech_factor: 0.4)
 Constructor.create(name: "Alfa Romeo", nationality: "Switzerland", tech_factor: 0.4)
 
 
-Driver.create(first_name: "Lewis", second_name: "Hamilton", nationality: "Britain", age: 34, constructor_id: 1, price: 10, skill_factor: 10)
+Driver.create(first_name: "Lewis", second_name: "Hamilton", nationality: "Britain", age: 34, constructor_id: 1, price: , skill_factor: 10)
 Driver.create(first_name: "Valtteri", second_name: "Bottas", nationality: "Iceland", age: 30, constructor_id: 1, price: 7, skill_factor: 7)
 Driver.create(first_name: "Sebastian", second_name: "Vettel", nationality: "Germany", age: 32, constructor_id: 2, price: 9, skill_factor: 9)
 Driver.create(first_name: "Charles", second_name: "Leclerc", nationality: "France", age: 22, constructor_id: 2, price: 7, skill_factor: 7)

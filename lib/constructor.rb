@@ -23,6 +23,10 @@ class Constructor < ActiveRecord::Base
         Constructor.single_drivers[0].drivers << perez
     end 
 
-
-
+    def after_driver_selection
+        drivers.each do |d|
+          Constructor.budget -= d.price 
+        end 
+        Constructor.budget
+    end 
 end 

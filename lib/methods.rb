@@ -2,17 +2,15 @@ require 'pry'
 
 # PREPARE GAME
 #-------------------
-
 def create_game_instance
-  start_bugdet = 100
-  Game.create(budget: start_bugdet)
-end
+    Game.create
+end 
 
 # GAME > PRE-SEASON
 #--------------------
-def start_game
+def start_game(current_game)
     introduction 
-    users_team = create_team
+    users_team = create_team(current_game)
     list_drivers
     select_drivers(users_team)
     Constructor.fill_teams
@@ -25,13 +23,15 @@ def introduction
     puts "Create your team, pick your drivers and you're ready for the new season ahead"
 end 
 
-def create_team 
+def create_team(current_game)
     puts "Please enter your team name:"
     team_name = gets.strip 
     puts "Please enter the country your team has originated from:"
     team_nationality = gets.strip
-    Constructor.create(name: team_name, nationality: team_nationality, tech_factor: 0.5)
+    current_game.users_team = team_name
+    Constructor.create(name: team_name, nationality: team_nationality, tech_factor: 0.5, budget: 100)
 end 
+    
 
 def list_drivers 
     puts `clear`
@@ -194,34 +194,31 @@ end
 
 def new_game 
 
-    start_game 
+    current_game = create_game_instance
+    start_game(current_game)
 
 
   ## prep game
  ##--------------
-  current_game = create_game_instance
+  
   #upgrade_team(current_game)
 
   ## pre-season
   ##--------------
-  # introduction
-  # users_team = create_team
-  # list_drivers
-  # select_drivers(users_team)
 
   ## season-run
 
-  #   Race.all.each do |current_race|
-      current_race = Race.all[0]         #test race
+     Race.all.each do |current_race|
       create_race_results(current_race)
+      show_race_ranking(current_race)
+      puts "rankings"
       wait_for_any_key
-  #    show_race_ranking(current_race)
-  #    wait_for_any_key
-  #    show_current_driver_standings
-  #    wait_for_any_key
+      show_current_driver_standings
+      puts "standings"
+      wait_for_any_key
   #    upgrade_team
   #    wait_for_any_key
-  #  end
+    end
 
 
 end 

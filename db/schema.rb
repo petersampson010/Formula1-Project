@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.string "nationality"
     t.float "tech_factor"
     t.integer "game_id"
+    t.integer "budget"
   end
 
   create_table "drivers", force: :cascade do |t|
@@ -38,7 +39,6 @@ ActiveRecord::Schema.define(version: 5) do
 
   create_table "games", force: :cascade do |t|
     t.string "users_team"
-    t.integer "budget"
   end
 
   create_table "races", force: :cascade do |t|
