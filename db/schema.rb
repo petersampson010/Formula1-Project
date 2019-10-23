@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.string "constructor_id"
     t.integer "price"
     t.float "skill_factor"
+    t.integer "game_id"
   end
 
   create_table "finishing_positions", force: :cascade do |t|
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 5) do
   create_table "races", force: :cascade do |t|
     t.string "circuit"
     t.string "location"
+    t.integer "game_id"
   end
 
 end

@@ -9,6 +9,7 @@ class CreateDriver < ActiveRecord::Migration[5.2]
             t.string :constructor_id
             t.integer :price
             t.float :skill_factor
+            t.integer :game_id
         end 
     end 
 end 

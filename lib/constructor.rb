@@ -5,7 +5,8 @@ class Constructor < ActiveRecord::Base
 
 
   def pick_driver(driver)
-    drivers << driver
+    self.drivers << driver
+    self.budget -= driver.price
   end
 
   def increase_techfactor(tech_points)
