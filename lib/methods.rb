@@ -195,6 +195,7 @@ end
 #-------------------------
 
 
+def start_game
 
   ## prep game
  ##--------------
@@ -203,10 +204,10 @@ end
 
   ## pre-season
   ##--------------
-  # introduction
-  # users_team = create_team
-  # list_drivers
-  # select_drivers(users_team)
+  introduction
+  users_team = create_team
+  list_drivers
+  select_drivers(users_team)
 
   ## season-run
 
