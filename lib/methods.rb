@@ -10,19 +10,6 @@ end
 
 # GAME > PRE-SEASON
 #--------------------
-<<<<<<< HEAD
-def new_game 
-    introduction 
-    users_team = create_team
-    list_drivers
-    select_drivers(users_team)
-    Constructor.fill_teams
-end 
-=======
-
-
-
->>>>>>> 0919_updateteams
 
 def introduction 
     puts "Formula1-Fantasy"
