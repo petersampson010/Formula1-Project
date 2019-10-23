@@ -45,7 +45,7 @@ class Driver < ActiveRecord::Base
     self.skill_factor += skill_points
   end
 
-end
+
   def self.reset_drivers_to_teams
     Driver.all.each do |d|
       if d.id > 16 
@@ -60,9 +60,4 @@ end
       end 
     end 
   end 
-
-
-
-
-
-end 
+end

@@ -1,14 +1,16 @@
+require 'pry'
+
 # PREPARE GAME
 #-------------------
 
-def reset_database
-  `rake db:drop`
-  `rake db:create`
-  `rake db:migrate`
+def create_game_instance
+  start_bugdet = 100
+  Game.create(budget: start_bugdet)
 end
 
 # GAME > PRE-SEASON
 #--------------------
+<<<<<<< HEAD
 def new_game 
     introduction 
     users_team = create_team
@@ -16,6 +18,11 @@ def new_game
     select_drivers(users_team)
     Constructor.fill_teams
 end 
+=======
+
+
+
+>>>>>>> 0919_updateteams
 
 def introduction 
     puts "Formula1-Fantasy"
@@ -142,10 +149,21 @@ def show_current_driver_standings
   Driver.all.show_standings
 end
 
-
-def earned_credits(race)
-
+def credits_earned_driver(id_race, id_driver)
+  fp = FinishingPosition.find_by(driver_id: id_driver,race_id: id_race)
+  credits_per_position(fp..final_position)
 end
+
+def credits_earned_team(race_id, team_id)
+  Constructor.find_by(id: team_id).drivers.each do |driver|
+    credits_earned_driver(race_id, driver.id)
+  end
+end
+
+def update_budget(race_id, team_id)
+  current_game.budegt += earned_credits_team(race_id, team_id)
+end
+
 
 def train_driver
 
@@ -155,16 +173,11 @@ def improve_car
 
 end
 
-def update_credits(team)
-
+def upgrade_team(current_game)
+  total_budget = current_game.budget # should be derived from Game
   
-
-end
-
-def upgrade_team
-  puts "You have earned XX credits in the last race"
-  puts "You have now total budegt of XX"
-  puts "Do you want to upgrade your team? Y-N"
+  puts "You have now total budget of #{total_budget}"
+  puts 'Do you want to upgrade your team? Y-N'
 
   #if yes
 
@@ -188,10 +201,13 @@ end
 
 def new_game
 
-  ## prep enviroment
-  #reset_database
+  ## prep game
+ ##--------------
+  current_game = create_game_instance
+  #upgrade_team(current_game)
 
   ## pre-season
+  ##--------------
   # introduction
   # users_team = create_team
   # list_drivers
@@ -199,18 +215,16 @@ def new_game
 
   ## season-run
 
-  # run one race
-
-  # puts "start races"
   #   Race.all.each do |current_race|
-  #    #current_race = Race.all[0]         #test race
-  #    create_race_results(current_race)
-  #    wait_for_any_key
+      current_race = Race.all[0]         #test race
+      create_race_results(current_race)
+      wait_for_any_key
   #    show_race_ranking(current_race)
   #    wait_for_any_key
   #    show_current_driver_standings
   #    wait_for_any_key
-  #    
+  #    upgrade_team
+  #    wait_for_any_key
   #  end
 
 
