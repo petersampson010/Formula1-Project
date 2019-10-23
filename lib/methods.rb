@@ -118,6 +118,11 @@ def extra_credits_per_position(position)
   end
 end
 
+def wait_for_key
+  require 'io/console'
+  puts "Press any key to continue"
+  STDIN.getch   
+end
 
 def create_race_results(race)
   race.run_race(Driver.all)
@@ -132,24 +137,12 @@ def show_current_driver_standings
 end
 
 
-
-
 def prepare_next_race
 # options to improve driver/car
 # options to see stats on season 
 end
 
 
-def run_season
-  # run all races
-  Race.all.each do |race|
-    create_race_results(race)
-
-    #prepare_for_next_race
-    #final_results
-  end
-
-end
 
 
 #GAME LOGIC
@@ -169,10 +162,17 @@ def new_game
   ## season-run
 
   # run one race
-   race_one = Race.all[0] #dummy race data
-   puts race_one
-   #create_race_results(race)
-   #show_race_ranking(race)
+  puts "start races"
+    Race.all.each do |current_race|
+     #current_race = Race.all[0]         #test race
+     create_race_results(current_race)
+     wait_for_key
+     show_race_ranking(current_race)
+     wait_for_key
+     show_current_driver_standings
+  #   #
+  #   #wait_to_continue
+   end
 
 
   #end
