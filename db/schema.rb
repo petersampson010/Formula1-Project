@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 4) do
+ActiveRecord::Schema.define(version: 5) do
 
   create_table "constructors", force: :cascade do |t|
     t.string "name"
     t.string "nationality"
     t.float "tech_factor"
+    t.integer "game_id"
   end
 
   create_table "drivers", force: :cascade do |t|
@@ -32,6 +33,12 @@ ActiveRecord::Schema.define(version: 4) do
     t.integer "final_position"
     t.integer "race_id"
     t.integer "driver_id"
+    t.integer "game_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "users_team"
+    t.integer "budget"
   end
 
   create_table "races", force: :cascade do |t|
