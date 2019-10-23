@@ -2,8 +2,9 @@
 #-------------------
 
 def reset_database
-  #rake db:drop
-  #rake db:set
+  `rake db:drop`
+  `rake db:create`
+  `rake db:migrate`
 end
 
 # GAME > PRE-SEASON
@@ -14,23 +15,23 @@ def introduction
     puts "You've just won the lottery! What will you do with it..."
     puts "Build an F1 Team of course!"
     puts "Create your team, pick your drivers and you're ready for the new season ahead"
-end 
+end
 
-def create_team 
+def create_team
     puts "Please enter your team name:"
-    team_name = gets.strip 
+    team_name = gets.strip
     puts "Please enter the country your team has originated from:"
     team_nationality = gets.strip
     Constructor.create(name: team_name, nationality: team_nationality, tech_factor: 0.5)
-end 
+end
 
-def list_drivers 
+def list_drivers
     puts `clear`
     puts "Now its time to hire some drivers for your season!" 
     puts "Every drivers desperate to be on your books but watch out, that lottery fund of £100m will only take you so far and once a drivers signed that contract hes in for the season!"
     sleep(2)
     Driver.all.each {|d| puts "#{d.id}. #{d.first_name} #{d.second_name} | Age:#{d.age} | #{d.nationality} | Price:#{d.price}"}
-end 
+end
 
 def select_drivers(users_team) 
     driver_one_selection(users_team)
@@ -38,7 +39,7 @@ def select_drivers(users_team)
     puts "And there it is, the lineup for #{users_team.name} is:"
     puts "#{users_team.drivers[0].first_name} #{users_team.drivers[0].second_name}"
     puts "#{users_team.drivers[1].first_name} #{users_team.drivers[1].second_name}"
-end 
+end
 
 def driver_one_selection(users_team)
     "please select the number of the driver you'd like to join your team:"
@@ -46,26 +47,26 @@ def driver_one_selection(users_team)
     driver1 = Driver.find_by(id: driver1_id)
     users_team.pick_driver(driver1)
     puts "Great choice! #{driver1.first_name} has been on fire pre-season. You have #{users_team.budget} left for your next driver:"
-end 
+end
 
 def driver_two_selection(users_team)
-    driver2_id = gets.strip 
+    driver2_id = gets.strip
     driver2 = Driver.find_by(id: driver2_id)
     if enough_money?(users_team, driver2)
         users_team.pick_driver(driver2)
-    else 
+    else
         puts "You havent got the money for this driver, please select again:"
         driver_two_selection(users_team)
-    end 
-end 
+    end
+end
 
 def enough_money?(users_team, driver)
-    if users_team.budget >= driver.price 
-        return true 
-    else 
-        return false 
-    end 
-end 
+    if users_team.budget >= driver.price
+        return true
+    else
+        return false
+    end
+end
 
 
 
@@ -97,7 +98,7 @@ def points_per_position(position)
   end
 end
 
-def extra_credits_per_position(position)
+def credits_per_position(position)
   case position
   when 1
     10
@@ -111,14 +112,12 @@ def extra_credits_per_position(position)
     2
   when 6
     1
-  when 8..10
-    0
   else
     0
   end
 end
 
-def wait_for_key
+def wait_for_any_key
   require 'io/console'
   puts "Press any key to continue"
   STDIN.getch   
@@ -137,9 +136,41 @@ def show_current_driver_standings
 end
 
 
-def prepare_next_race
-# options to improve driver/car
-# options to see stats on season 
+def earned_credits(race)
+
+end
+
+def train_driver
+
+end
+
+def improve_car
+
+end
+
+def update_credits(team)
+
+  
+
+end
+
+def upgrade_team
+  puts "You have earned XX credits in the last race"
+  puts "You have now total budegt of XX"
+  puts "Do you want to upgrade your team? Y-N"
+
+  #if yes
+
+  puts "upgrade car or train driver?"
+
+    #if car
+    improve_car
+    #elseif driver
+    train_driver
+
+  #else
+  #end
+
 end
 
 
@@ -162,20 +193,17 @@ def new_game
   ## season-run
 
   # run one race
-  puts "start races"
-    Race.all.each do |current_race|
-     #current_race = Race.all[0]         #test race
-     create_race_results(current_race)
-     wait_for_key
-     show_race_ranking(current_race)
-     wait_for_key
-     show_current_driver_standings
-  #   #
-  #   #wait_to_continue
-   end
-
-
-  #end
+  # puts "start races"
+  #   Race.all.each do |current_race|
+  #    #current_race = Race.all[0]         #test race
+  #    create_race_results(current_race)
+  #    wait_for_any_key
+  #    show_race_ranking(current_race)
+  #    wait_for_any_key
+  #    show_current_driver_standings
+  #    wait_for_any_key
+  #    
+  #  end
 
 
 end 
