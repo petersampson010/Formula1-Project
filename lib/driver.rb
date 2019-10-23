@@ -24,7 +24,8 @@ class Driver < ActiveRecord::Base
 
   def self.reset_drivers_to_teams
     Driver.all.each do |d|
-      if d.id.even? 
+      if d.id > 16 
+      elsif d.id.even? 
         new_id = d.id/2
         new_constructor = Constructor.find_by(id: new_id)
         new_constructor.drivers << d
@@ -36,7 +37,8 @@ class Driver < ActiveRecord::Base
     end 
   end 
 
-  def fill_empty_teams
-  end 
+
+
+
 
 end 

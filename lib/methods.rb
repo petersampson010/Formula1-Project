@@ -5,7 +5,7 @@ def new_game
     users_team = create_team
     list_drivers
     select_drivers(users_team)
-    Driver.reset_drivers_to_teams
+    Constructor.fill_teams
 end 
 
 def introduction 
