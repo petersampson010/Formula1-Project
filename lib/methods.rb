@@ -1,14 +1,15 @@
+# PREPARE GAME
+#-------------------
+
+def delete_database_content
+end
+
+def reseed_database
+end
 
 
-#METHOD
-
-# PREPARE SEASON
-def new_game 
-    introduction 
-    users_team = create_team
-    list_drivers
-    select_drivers(users_team)
-end 
+# GAME > PRE-SEASON
+#--------------------
 
 def introduction 
     puts "Formula1-Fantasy"
@@ -68,9 +69,12 @@ def enough_money?(users_team, driver)
     end 
 end 
 
-#---------------
 
 
+
+
+# GAME > RUNNING THE SEASON
+#--------------------------
 
 def points_per_position(position)
   case position
@@ -94,10 +98,6 @@ def points_per_position(position)
     0
   end
 end
-
-
-# RUN THE SEASON
-#----------------
 
 def create_race_results(race)
   race.run_race(Driver.all)
@@ -132,3 +132,25 @@ def run_season
 end
 
 
+#GAME LOGIC
+#-------------------------
+
+def new_game
+
+  #prep enviroment
+  delete_database_content
+  reseed_database
+
+  #pre-season
+  introduction 
+  users_team = create_team
+  list_drivers
+  select_drivers(users_team)
+
+  #season-run
+
+
+  #end
+
+
+end 
