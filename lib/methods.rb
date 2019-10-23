@@ -3,8 +3,6 @@ require 'pry'
 # PREPARE GAME
 #-------------------
 
-puts "Hi Pete"
-
 def create_game_instance
   start_bugdet = 100
   Game.create(budget: start_bugdet)
@@ -196,12 +194,13 @@ end
 
 def new_game 
 
+    current_game = create_game_instance
     start_game 
     
 
   ## prep game
  ##--------------
-  current_game = create_game_instance
+  
   #upgrade_team(current_game)
 
   ## pre-season
