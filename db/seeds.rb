@@ -11,14 +11,14 @@ require_relative '../lib/driver.rb'
 require_relative '../lib/race.rb'
 
 
-Constructor.create(name: "Mercedes", nationality: "Germany", tech_factor: 1, game_id = nil)
-Constructor.create(name: "Ferrari", nationality: "Italy", tech_factor: 0.9, game_id = nil)
-Constructor.create(name: "Red Bull", nationality: "Austria", tech_factor: 0.8, game_id = nil)
-Constructor.create(name: "McLaren", nationality: "Britain", tech_factor: 0.6, game_id = nil)
-Constructor.create(name: "Renault", nationality: "France", tech_factor: 0.6, game_id = nil)
-Constructor.create(name: "Haas", nationality: "USA", tech_factor: 0.6, game_id = nil)
-Constructor.create(name: "Toro Rosso", nationality: "Italy", tech_factor: 0.4, game_id = nil)
-Constructor.create(name: "Alfa Romeo", nationality: "Switzerland", tech_factor: 0.4, game_id = nil)
+Constructor.create(name: "Mercedes", nationality: "Germany", tech_factor: 1)
+Constructor.create(name: "Ferrari", nationality: "Italy", tech_factor: 0.9)
+Constructor.create(name: "Red Bull", nationality: "Austria", tech_factor: 0.8)
+Constructor.create(name: "McLaren", nationality: "Britain", tech_factor: 0.6)
+Constructor.create(name: "Renault", nationality: "France", tech_factor: 0.6)
+Constructor.create(name: "Haas", nationality: "USA", tech_factor: 0.6)
+Constructor.create(name: "Toro Rosso", nationality: "Italy", tech_factor: 0.4)
+Constructor.create(name: "Alfa Romeo", nationality: "Switzerland", tech_factor: 0.4)
 
 
 Driver.create(first_name: "Lewis", second_name: "Hamilton", nationality: "Britain", age: 34, constructor_id: 1, price: 10, skill_factor: 10)
@@ -37,6 +37,8 @@ Driver.create(first_name: "Daniil", second_name: "Kvyat", nationality: "Russia",
 Driver.create(first_name: "Pierre", second_name: "Gasly", nationality: "France", age: 23, constructor_id: 7, price: 7, skill_factor: 7)
 Driver.create(first_name: "Kimi", second_name: "Raikkonen", nationality: "Finland", age: 40, constructor_id: 8, price: 6, skill_factor: 6)
 Driver.create(first_name: "Antonio", second_name: "Giovinazzi", nationality: "Italy", age: 25, constructor_id: 8, price: 5, skill_factor: 5)
+Driver.create(first_name: "Lance", second_name: "Stroll", nationality: "Canada", age: 20, price: 5, skill_factor: 5)
+Driver.create(first_name: "Sergio", second_name: "Perez", nationality: "Mexico", age: 29, price: 5, skill_factor: 5)
 
 Race.create(circuit: "Melbourne Circuit", location: "Melbourne, Australia")
 Race.create(circuit: "Bahrain International Circuit", location: "Bahrain")

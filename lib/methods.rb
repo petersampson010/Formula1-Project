@@ -10,11 +10,11 @@ end
 # GAME > PRE-SEASON
 #--------------------
 def new_game 
-    
     introduction 
     users_team = create_team
     list_drivers
     select_drivers(users_team)
+    Constructor.fill_teams
 end 
 
 def introduction 
