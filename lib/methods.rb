@@ -1,11 +1,6 @@
 # PREPARE GAME
 #-------------------
 
-def reset_database
-  `rake db:drop`
-  `rake db:create`
-  `rake db:migrate`
-end
 
 # GAME > PRE-SEASON
 #--------------------
