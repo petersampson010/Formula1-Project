@@ -1,6 +1,7 @@
 
 
 def new_game 
+    
     introduction 
     users_team = create_team
     list_drivers
@@ -65,3 +66,12 @@ def enough_money?(users_team, driver)
     end 
 end 
 
+def reset_database 
+    system("rake db:migrate:reset")
+    # system("rake db:rollback")
+    # system("rake db:rollback")
+    # system("rake db:rollback")
+    # system("rake db:rollback")
+    # system("rake db:migrate")
+    # system("rake db:seed")
+end 

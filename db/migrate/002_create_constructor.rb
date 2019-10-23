@@ -5,6 +5,7 @@ class CreateConstructor < ActiveRecord::Migration[5.2]
             t.string :name 
             t.string :nationality
             t.float :tech_factor
+            t.integer :game_id
         end 
     end 
 end 
