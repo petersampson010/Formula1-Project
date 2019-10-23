@@ -41,6 +41,9 @@ class Driver < ActiveRecord::Base
     positions.select { |pos| pos == 1 }.size
   end
 
+  def increase_skill(skill_points)
+    self.skill_factor += skill_points
+  end
 
 end
   def self.reset_drivers_to_teams
