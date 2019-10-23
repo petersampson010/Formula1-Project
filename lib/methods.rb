@@ -12,7 +12,7 @@ end
 
 # GAME > PRE-SEASON
 #--------------------
-def new_game 
+def start_game
     introduction 
     users_team = create_team
     list_drivers
@@ -194,7 +194,10 @@ end
 #GAME LOGIC
 #-------------------------
 
+def new_game 
 
+    start_game 
+    
 
   ## prep game
  ##--------------
