@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 5) do
 
   create_table "games", force: :cascade do |t|
     t.string "users_team"
+    t.string "budget"
   end
 
   create_table "races", force: :cascade do |t|
