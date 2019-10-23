@@ -97,6 +97,28 @@ def points_per_position(position)
   end
 end
 
+def extra_credits_per_position(position)
+  case position
+  when 1
+    10
+  when 2
+    8
+  when 3
+    6
+  when 4
+    4
+  when 5
+    2
+  when 6
+    1
+  when 8..10
+    0
+  else
+    0
+  end
+end
+
+
 def create_race_results(race)
   race.run_race(Driver.all)
 end
