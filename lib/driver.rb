@@ -25,9 +25,13 @@ class Driver < ActiveRecord::Base
   def self.reset_drivers_to_teams
     Driver.all.each do |d|
       if d.id.even? 
-        d.constructor_id = d.id/2
+        new_id = d.id/2
+        new_constructor = Constructor.find_by(id: new_id)
+        d.constructor = new_constructor 
       else 
-        d.constructor_id = (d.id/2)+0.5
+        new_id = ((d.id/2).to_f+0.5).to_i
+        new_constructor = Constructor.find_by(id: new_id)
+        d.constructor
       end 
     end 
   end 

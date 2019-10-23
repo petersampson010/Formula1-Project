@@ -11,14 +11,14 @@ require_relative '../lib/driver.rb'
 require_relative '../lib/race.rb'
 
 
-Constructor.create(name: "Mercedes", nationality: "Germany", tech_factor: 1, game_id = nil)
-Constructor.create(name: "Ferrari", nationality: "Italy", tech_factor: 0.9, game_id = nil)
-Constructor.create(name: "Red Bull", nationality: "Austria", tech_factor: 0.8, game_id = nil)
-Constructor.create(name: "McLaren", nationality: "Britain", tech_factor: 0.6, game_id = nil)
-Constructor.create(name: "Renault", nationality: "France", tech_factor: 0.6, game_id = nil)
-Constructor.create(name: "Haas", nationality: "USA", tech_factor: 0.6, game_id = nil)
-Constructor.create(name: "Toro Rosso", nationality: "Italy", tech_factor: 0.4, game_id = nil)
-Constructor.create(name: "Alfa Romeo", nationality: "Switzerland", tech_factor: 0.4, game_id = nil)
+Constructor.create(name: "Mercedes", nationality: "Germany", tech_factor: 1)
+Constructor.create(name: "Ferrari", nationality: "Italy", tech_factor: 0.9)
+Constructor.create(name: "Red Bull", nationality: "Austria", tech_factor: 0.8)
+Constructor.create(name: "McLaren", nationality: "Britain", tech_factor: 0.6)
+Constructor.create(name: "Renault", nationality: "France", tech_factor: 0.6)
+Constructor.create(name: "Haas", nationality: "USA", tech_factor: 0.6)
+Constructor.create(name: "Toro Rosso", nationality: "Italy", tech_factor: 0.4)
+Constructor.create(name: "Alfa Romeo", nationality: "Switzerland", tech_factor: 0.4)
 
 
 Driver.create(first_name: "Lewis", second_name: "Hamilton", nationality: "Britain", age: 34, constructor_id: 1, price: 10, skill_factor: 10)
