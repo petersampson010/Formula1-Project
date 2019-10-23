@@ -1,12 +1,10 @@
 # PREPARE GAME
 #-------------------
 
-def delete_database_content
+def reset_database
+  #rake db:drop
+  #rake db:set
 end
-
-def reseed_database
-end
-
 
 # GAME > PRE-SEASON
 #--------------------
@@ -137,17 +135,16 @@ end
 
 def new_game
 
-  #prep enviroment
-  delete_database_content
-  reseed_database
+  ## prep enviroment
+  #reset_database
 
-  #pre-season
-  introduction 
-  users_team = create_team
-  list_drivers
-  select_drivers(users_team)
+  ## pre-season
+  # introduction
+  # users_team = create_team
+  # list_drivers
+  # select_drivers(users_team)
 
-  #season-run
+  ## season-run
 
 
   #end
