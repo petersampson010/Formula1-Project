@@ -88,6 +88,7 @@ class Game < ActiveRecord::Base
       budget: 100,
       game_id: id
     )
+    self.users_team = team_name
     @our_team_id = our_team.id
   end
 
