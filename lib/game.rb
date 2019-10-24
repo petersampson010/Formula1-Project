@@ -86,7 +86,7 @@ class Game < ActiveRecord::Base
       nationality: team_nationality,
       tech_factor: 4.0,
       budget: 100,
-      game_id: id
+      game_id: self.id
     )
     self.users_team = team_name
     @our_team_id = our_team.id
@@ -170,18 +170,6 @@ class Game < ActiveRecord::Base
 
 
 
-
-
-#   def select_car_part 
-#     prompt = TTY::Prompt.new
-#     example = prompt.select("Please select the driver you would like to join your team", cycle:true) do |menu|
-#         sum = 0
-#         selectable_drivers.each_with_index do |d, index|
-#             menu.choice "#{d.price} - #{d.first_name} #{d.second_name}", index
-#         end 
-#     end
-#     selectable_drivers.each_with_index do |d, i|
-#         if example == indexend 
 
   def select_drivers_for_team 
     prompt_user_select_first_driver
@@ -337,16 +325,16 @@ class Game < ActiveRecord::Base
         end 
         if example == 0 
             puts "Engine Upgraded!"
-            self.our_team.tech_factor += 0.5
+            self.our_team.update(tech_factor: self.our_team.tech_factor += 0.5)
         elsif example == 1
             puts "Front Wing Upgraded!"
-            self.our_team.tech_factor += 0.2
+            self.our_team.update(tech_factor: self.our_team.tech_factor += 0.1)
         elsif example == 2 
             puts "Tyres Upgraded!"
-            self.our_team.tech_factor += 0.2
+            self.our_team.update(tech_factor: self.our_team.tech_factor += 0.2)
         elsif example == 3 
             puts "Suspension Upgraded!"
-            self.our_team.tech_factor += 0.3
+            self.our_team.update(tech_factor: self.our_team.tech_factor += 0.3)
         end 
     end 
 
@@ -362,10 +350,10 @@ class Game < ActiveRecord::Base
         end 
         if example2 == 0 
             puts "Driver Upgraded!"
-            self.our_team.drivers[0].skill_factor += 3
+            our_team.drivers[0].update(skill_factor: our_team.drivers[0].skill_factor += 0.5)
         elsif example2 == 1 
             puts "Driver Upgraded!"
-            self.our_team.drivers[1].skill_factor += 3 
+            our_team.drivers[1].update(skill_factor: our_team.drivers[1].skill_factor += 0.5)
         end 
     end 
 end

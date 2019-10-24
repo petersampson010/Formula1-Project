@@ -6,7 +6,8 @@ game = Game.create
 game.setup_game_data
 game.create_team
 game.testing_select_driver
-game.testing_select_driver 
+game.testing_select_driver
+game.fill_teams
 game.present_lineup
 
 
