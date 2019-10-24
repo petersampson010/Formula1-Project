@@ -11,5 +11,7 @@ game.fill_teams
 
 
 game.present_lineup
+
+game.mid_season_changes
 # binding.pry
 # puts 'eof'

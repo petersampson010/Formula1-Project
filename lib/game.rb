@@ -1,4 +1,5 @@
 require 'pry'
+require 'tty-prompt'
 
 class Game < ActiveRecord::Base
 
@@ -169,4 +170,66 @@ class Game < ActiveRecord::Base
     STDIN.getch   
   end
 
+  def changes_introduction
+    puts "Improving your team is vital throughout the season! Keep winning races and you'll have more to spend!"
+    puts "Would you like to make changes to your car or to your driver?"
+  end 
+
+    def mid_season_changes 
+        prompt = TTY::Prompt.new
+        example3 = prompt.select("Would you like to make any changes to the team?", cycle:true) do |menu|
+            menu.choice "No", 0
+            menu.choice "Car", 1
+            menu.choice "Drivers", 2
+        end 
+        if example3 == 0 
+            puts "Confident in your team, lets push on to the next race"
+        elsif example3 == 1 
+            select_car_part
+        elsif
+            driver_improvements
+        end 
+    end 
+    
+    def select_car_part 
+        prompt = TTY::Prompt.new
+        example = prompt.select("Scroll through the car elements and select the part you would like to improve", cycle:true) do |menu|
+            menu.choice "Engine: £3", 0
+            menu.choice "Front Wing: £1", 1
+            menu.choice "Tyres: £1", 2
+            menu.choice "Suspension: £2", 3
+        end 
+        if example == 0 
+            puts "Engine Upgraded!"
+            self.our_team.tech_factor += 0.5
+        elsif example == 1
+            puts "Front Wing Upgraded!"
+            self.our_team.tech_factor += 0.2
+        elsif example == 2 
+            puts "Tyres Upgraded!"
+            self.our_team.tech_factor += 0.2
+        elsif example == 3 
+            puts "Suspension Upgraded!"
+            self.our_team.tech_factor += 0.3
+        end 
+    end 
+
+    def drivers_names 
+        ["#{self.our_team.drivers[0].first_name} #{self.our_team.drivers[0].second_name}", "#{self.our_team.drivers[1].first_name} #{self.our_team.drivers[1].second_name}"]
+    end 
+
+    def driver_improvements 
+        prompt = TTY::Prompt.new
+        example2 = prompt.select("Which driver would you like to improve? Each Training session costs £3", cycle:true) do |menu|
+            menu.choice "#{self.drivers_names[0]}", 0
+            menu.choice "#{self.drivers_names[1]}", 1
+        end 
+        if example2 == 0 
+            puts "Driver Upgraded!"
+            self.our_team.drivers[0].skill_factor += 3
+        elsif example2 == 1 
+            puts "Driver Upgraded!"
+            self.our_team.drivers[1].skill_factor += 3 
+        end 
+    end 
 end
