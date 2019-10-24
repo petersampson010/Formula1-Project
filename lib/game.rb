@@ -145,6 +145,7 @@ class Game < ActiveRecord::Base
   def prompt_user_select_second_driver
     puts ' '
     puts 'Great choice!'
+    puts ' '
     puts "#{our_team.drivers[0].first_name} has been on fire pre-season."
     puts "You have #{our_team.budget} left for your next driver:"
     puts ' '
@@ -162,7 +163,7 @@ class Game < ActiveRecord::Base
 
   def single_drivers
     self.game_constructors.select {|team| team.drivers.size == 1 || team.drivers.size == 0}
-  end  
+  end
 
   def fill_teams 
     stroll = Driver.find_by(second_name: "Stroll", game_id: self.id)
@@ -170,7 +171,7 @@ class Game < ActiveRecord::Base
     teams_needing = self.single_drivers
     teams_needing[0].drivers << stroll 
     teams_needing[1].drivers << perez 
-  end 
+  end
 
   def present_lineup
     puts "And there it is, the lineup for '#{our_team.name}':"
@@ -180,17 +181,12 @@ class Game < ActiveRecord::Base
     puts ' '
   end
 
-  
   # RUN A RACE
 
   def create_race_results(race)
     race.run_race(drivers_in_game)
   end
 
-  def show_race_result_text
-    puts 'Live from XX, we just got the final results:'
-    puts ' '
-  end
 
   def show_race_ranking(race)
     race.show_ranking(drivers_in_game)
@@ -198,6 +194,7 @@ class Game < ActiveRecord::Base
 
   # RUN SEASON
 
+  # prep
   def show_season_intro_text
     puts '..prepare season..'
   end
@@ -206,23 +203,52 @@ class Game < ActiveRecord::Base
     Race.all.select { |race| race.game_id == id }
   end
 
-  ## run a race
 
- 
-
-  def drivers_points
-    drivers_in_game.map { |driver| [driver.points, driver] }
-    # returns an array of arrays [points, driver]
+  def driver_finishingpositions_all_races(driver)
+    FinishingPosition.select do |fp|
+      fp.game_id == id && fp.driver_id == driver.id
+    end
+    # returns an array of instances [,,,]
   end
 
-  def ranked_drivers_points
-    drivers_points.sort { |a, b| a[0] <=> b[0] }.reverse
+  def driver_positions_all_races(driver)
+    driver_finishingpositions_all_races(driver).map(&:final_position)
+    # returns an array of integers [,,,]
+  end
+
+  def driver_points_all_races(driver)
+    # sums all points a driver has earned
+    driver_positions_all_races(driver).map { |pos| points_per_position(pos) }
+    #  return total points > integer
+  end
+
+  def driver_total_points(driver)
+    # sums all points a driver has earned
+    driver_points_all_races(driver).reduce { |sum, point| sum + point }
+    #  return total points > integer
+  end
+
+  def driver_wins(driver)
+    driver_positions_all_races(driver).select { |pos| pos == 1 }.size
+    # returns an integer
+  end
+
+  def drivers_total_points
+    drivers_in_game.map do |driver|
+      [ driver_total_points(driver), driver ]
+    end
+
+  end
+
+  def ranked_drivers_total_points
+    drivers_total_points.sort { |a, b| a[0] <=> b[0] }.reverse
     # returns an sorted (desc) array of arrays [points, driver]
   end
 
+
   def show_standing_for_game
     puts 'Rank | Driver | Points | Wins'
-    ranked_drivers_points.each_with_index do |standing, index|
+    ranked_drivers_total_points.each_with_index do |standing, index|
       puts "#{index + 1} | #{standing[1].name} | #{standing[0]} | #{standing[1].wins}"
     end
     puts ' '

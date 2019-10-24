@@ -8,17 +8,17 @@ class Driver < ActiveRecord::Base
     "#{first_name} #{second_name}"
   end
 
-  def positions
-    # gets all positions in races for instance
-    finishing_positions.map(&:final_position)
-    # returns an array of positions
-  end
+  # def positions
+  #   # gets all positions in races for instance
+  #   finishing_positions.map(&:final_position)
+  #   # returns an array of positions
+  # end
 
-  def points
-    # sums all points a driver has earned
-    positions.reduce { |sum, pos| sum + points_per_position(pos) }
-    # return total points > interger
-  end
+  # def points
+  #   # sums all points a driver has earned
+  #   positions.reduce { |sum, pos| sum + points_per_position(pos) }
+  #   # return total points > interger
+  # end
 
   def wins
     positions.select { |pos| pos == 1 }.size
