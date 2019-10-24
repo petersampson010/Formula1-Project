@@ -54,7 +54,7 @@ class Race < ActiveRecord::Base
     puts ' '
     drivers_finishingposition.each do |fp|
 
-      puts "#{fp.final_position}. #{fp.driver.name} "
+      puts "#{fp.final_position}. #{fp.driver.name}"
     end
     puts ' '
   end
