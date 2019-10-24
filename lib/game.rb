@@ -107,7 +107,7 @@ class Game < ActiveRecord::Base
     our_team = Constructor.create(
       name: team_name,
       nationality: team_nationality,
-      tech_factor: 0.3,
+      tech_factor: 4.0,
       budget: 100,
       game_id: id
     )
@@ -243,7 +243,7 @@ class Game < ActiveRecord::Base
   end
 
   def driver_positions_all_races(driver)
-    driver_finishingpositions_all_races(driver).map(&:final_position)
+    driver_finishingpositions_all_races(driver).map{ |fp| fp.final_position } 
     # returns an array of integers [,,,]
   end
 
@@ -276,6 +276,7 @@ class Game < ActiveRecord::Base
   end
 
   def show_standing_for_game
+
     puts 'Rank | Driver | Points'# | Wins'
     ranked_drivers_total_points.each_with_index do |standing, index|
       puts "#{index + 1} | #{standing[1].name} | #{standing[0]} }"#| #{standing[1].wins}"
@@ -285,15 +286,11 @@ class Game < ActiveRecord::Base
 
 ## Team Rankings
 
-def drivers_in_team(team)
-
-end
 
 def team_scoreboard
   game_constructors.each_with_index.map do |team, index|
     [index +1, team.name, team.drivers[0], team.drivers[1], '', '']
   end
-  # returns an array of arrays
 end
 
 def sorted_team_scoreboard
