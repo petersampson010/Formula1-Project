@@ -151,6 +151,37 @@ class Game < ActiveRecord::Base
     puts "You have #{our_team.budget} left for your next driver:"
     puts ' '
   end
+    def testing_list_selectable_drivers 
+        selectable_drivers.map {|d| "Price: #{d.price} | #{d.first_name} #{d.second_name}"}
+    end 
+
+
+    def testing_select_driver 
+        prompt = TTY::Prompt.new
+        example = prompt.select("Please select the driver you would like to join your team", testing_list_selectable_drivers)
+        selectable_drivers.each_with_index do |d, i|
+            if example == testing_list_selectable_drivers[i]
+                our_team.pick_driver(d)
+                balance = our_team.budget - d.price
+                update_team_budget(balance)
+            end 
+        end 
+    end 
+
+
+
+
+
+#   def select_car_part 
+#     prompt = TTY::Prompt.new
+#     example = prompt.select("Please select the driver you would like to join your team", cycle:true) do |menu|
+#         sum = 0
+#         selectable_drivers.each_with_index do |d, index|
+#             menu.choice "#{d.price} - #{d.first_name} #{d.second_name}", index
+#         end 
+#     end
+#     selectable_drivers.each_with_index do |d, i|
+#         if example == indexend 
 
   def select_drivers_for_team 
     prompt_user_select_first_driver
