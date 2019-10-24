@@ -10,9 +10,7 @@ game.fill_teams
 
 game.present_lineup
 
-<<<<<<< HEAD
-game.mid_season_changes
-=======
+# game.mid_season_changes
 game.show_season_intro_text
 
 race = game.races_in_game[0]
@@ -26,6 +24,5 @@ puts 'eof'
 
 
 
->>>>>>> 3254435d3e2617cc57cb8d09e950b8001de0115a
 # binding.pry
 # puts 'eof'
