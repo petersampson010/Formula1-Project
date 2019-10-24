@@ -108,4 +108,53 @@ class Game < ActiveRecord::Base
     puts our_team.drivers[0].name.to_s
     puts our_team.drivers[1].name.to_s
   end
+
+  def points_per_position(position)
+    case position
+    when 1
+      25
+    when 2
+      18
+    when 3
+      12
+    when 4
+      10
+    when 5
+      8
+    when 6
+      4
+    when 7
+      2
+    when 8..10
+      1
+    else
+      0
+    end
+  end
+
+  def credits_per_position(position)
+    case position
+    when 1
+      10
+    when 2
+      8
+    when 3
+      6
+    when 4
+      4
+    when 5
+      2
+    when 6
+      1
+    else
+      0
+    end
+  end
+
+  def wait_for_any_key
+    require 'io/console'
+    puts "Press any key to continue"
+    STDIN.getch   
+  end
+
 end
