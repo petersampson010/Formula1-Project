@@ -28,7 +28,7 @@ races.each do |race|
   game.show_constructor_standings
   #game.wait_for_any_key
   #game.mid_season_changes
-
+end
 
 game.show_end_season_stats
 
