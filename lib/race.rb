@@ -9,7 +9,7 @@ class Race < ActiveRecord::Base
     # creates a race score for a driver
     skill = driver.skill_factor
     technology = 1 #   driver.constructor.tech_factor
-    rand * 10.floor * skill * technology
+    rand #     * 10 * skill * technology
     # returns an integer > score
   end
 
@@ -34,8 +34,9 @@ class Race < ActiveRecord::Base
 
   def show_ranking(drivers)
     # iterates through ranking and prints each rank with position and lastname
+    puts ' Position | Driver '
     get_ranking(drivers).each do |rank|
-      puts "#{rank[0]}. #{rank[1].name}"
+      puts "#{rank[0]}. #{rank[1].name} "
     end
     # returns nil
   end
