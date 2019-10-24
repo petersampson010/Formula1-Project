@@ -7,7 +7,9 @@ game.setup_game_data
 game.create_team
 game.select_drivers_for_team
 
+game.fill_teams
+
 
 game.present_lineup
-binding.pry
-puts 'eof'
+# binding.pry
+# puts 'eof'
