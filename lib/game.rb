@@ -1,4 +1,5 @@
 require 'tty-prompt'
+require 'artii'
 
 class Game < ActiveRecord::Base
 
@@ -65,6 +66,9 @@ class Game < ActiveRecord::Base
 
   def welcome_screen
     puts `clear`
+    a = Artii::Base.new :font => 'slant'
+    puts a.asciify('FORMULA 1')
+
   end
 
   def require_team_name
@@ -378,6 +382,9 @@ end
 
   def show_end_season_stats
     puts ' '
+    a = Artii::Base.new :font => 'slant'
+    puts a.asciify('Le Fin')
+    puts ''
     puts 'Well, done! What an eventful season'
     puts 'Please find our over points and standing.'
     puts ''
@@ -387,7 +394,7 @@ end
       puts "#{stat[0]} | #{stat[1]} | #{stat[2]}"
     end
     puts '--------------------------------------'
-    puts  "Total  | #{driver_total_points(our_team.drivers[0])} | Driver #{driver_total_points(our_team.drivers[1])} "
+    puts  "Total  | #{driver_total_points(our_team.drivers[0])} | #{driver_total_points(our_team.drivers[1])} "
     puts  
   end
 
