@@ -8,7 +8,6 @@ game.create_team
 game.testing_select_driver
 game.testing_select_driver 
 game.present_lineup
-<<<<<<< HEAD
 
 game.show_season_intro_text
 # game.mid_season_changes
@@ -30,7 +29,6 @@ binding.pry
 
 puts 'eof'
 
-=======
 game.show_season_intro_text
 race = game.races_in_game[0]
 
@@ -50,7 +48,6 @@ race = game.races_in_game[0]
 # game.show_race_ranking(race)
 # #game.wait_for_any_key
 # game.show_standing_for_game
->>>>>>> 6d414054a3639c8aac3b4ac53ae401c0490367bf
 # binding.pry
 # puts 'eof'
 
