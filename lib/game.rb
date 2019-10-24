@@ -159,6 +159,18 @@ class Game < ActiveRecord::Base
     select_driver
   end
 
+  def single_drivers
+    self.game_constructors.select {|team| team.drivers.size == 1 || team.drivers.size == 0}
+  end  
+
+  def fill_teams 
+    stroll = Driver.find_by(second_name: "Stroll", game_id: self.id)
+    perez = Driver.find_by(second_name: "Perez", game_id: self.id)
+    teams_needing = self.single_drivers
+    teams_needing[0].drivers << stroll 
+    teams_needing[1].drivers << perez 
+  end 
+
   def present_lineup
     puts "And there it is, the lineup for '#{our_team.name}':"
     puts ' '

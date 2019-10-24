@@ -6,6 +6,7 @@ game = Game.create
 game.setup_game_data
 game.create_team
 game.select_drivers_for_team
+game.fill_teams
 
 game.present_lineup
 
@@ -19,3 +20,8 @@ game.show_race_ranking(race)
 game.show_standing_for_game
 binding.pry
 puts 'eof'
+
+
+
+# binding.pry
+# puts 'eof'
