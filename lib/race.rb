@@ -52,12 +52,13 @@ class Race < ActiveRecord::Base
     puts ' '
     puts "Live from #{circuit}, we just got the final results:"
     puts ' '
+    puts ' Position | Driver   | Team'
+    puts '----------------------------------------------'
     drivers_finishingposition.each do |fp|
 
-      puts "#{fp.final_position}. #{fp.driver.name}"
+      puts "#{fp.final_position} | #{fp.driver.name} | #{Constructor.find_by(id: fp.driver.constructor_id).name}"
     end
     puts ' '
   end
-
 
 end 

@@ -216,7 +216,8 @@ class Game < ActiveRecord::Base
     puts ' '
     puts 'The teams are ready to roll for the new season'
     puts ' '
-    puts 'Team | Driver 1 | Driver 2 '
+    puts '     Team     |    Driver 1   |    Driver 2     '
+    puts '------------------------------------------------'
     game_constructors.map do |team|
       print "#{team.name}"
       print " | #{team.drivers[0].name}"
@@ -241,7 +242,9 @@ class Game < ActiveRecord::Base
   # RUN SEASON
 
   def show_season_intro_text
+    puts '..'
     puts '..prepare season..'
+    puts '..'
   end
 
   def races_in_game
@@ -291,22 +294,16 @@ class Game < ActiveRecord::Base
 
   def show_standing_for_game
 
-    puts 'Rank | Driver | Points'# | Wins'
+    puts '   Rank    |   Driver   |   Points'
+    puts '-----------------------------------'
     ranked_drivers_total_points.each_with_index do |standing, index|
-      puts "#{index + 1} | #{standing[1].name} | #{standing[0]} }"#| #{standing[1].wins}"
+      puts "#{index + 1} | #{standing[1].name} | #{standing[0]} "#| #{standing[1].wins}"
     end
     puts ' '
   end
 
 ## Team Rankings
 
-
-# def team_scoreboard
-#   puts 'Rank   | Team         | Driver      | Driver      '# | Points | Wins'
-#   game_constructors.each_with_index.map do |team, index|
-#     [index +1, team.name, team.drivers[0], team.drivers[1], '', '']
-#   end
-# end
 
 def team_scoreboard
   game_constructors.map do |team|
@@ -320,7 +317,8 @@ def sorted_team_scoreboard
 end
 
 def show_constructor_standings
-  puts 'Points   | Team '
+  puts 'Points | Team  '
+  puts '-----------------------
   sorted_team_scoreboard.each do |standing|
     puts "#{standing[0]} | #{standing[1]}"
   end
@@ -443,7 +441,7 @@ end
     a = Artii::Base.new :font => 'slant'
     puts a.asciify('Le Fin')
     puts ''
-    puts 'Well, done! What an eventful season'
+    puts 'Well, done! What an eventful season!'
     puts ''
     show_winning_constructor
     puts ''
@@ -453,7 +451,7 @@ end
     puts "Let's see how you did."
     puts ''
     puts 'Circuit   | Driver 1  Position | Driver 2 Position '
-    puts '--------------------------------------'
+    puts '---------------------------------------------------'
     end_season_stats.each do |stat|
       puts "#{stat[0]} | #{stat[1]} | #{stat[2]}"
     end
