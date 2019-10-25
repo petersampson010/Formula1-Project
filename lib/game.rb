@@ -144,9 +144,15 @@ class Game < ActiveRecord::Base
   end
 
   def selectable_drivers
-    drivers_in_game.reject do |driver|
-      driver.first_name == 'Lance' || driver.first_name == 'Sergio' || driver.price > our_team.budget || driver.first_name == our_team.drivers[0].first_name if our_team.drivers!=[]
+    array = drivers_in_game.reject do |driver|
+      driver.constructor_id == nil
+    end 
+    array1 = array.reject do |driver|
+      driver.price > our_team.budget || driver.first_name == our_team.drivers[0].first_name if our_team.drivers!=[]
+      # driver.first_name == 'Lance' || driver.first_name == 'Sergio' || driver.price > our_team.budget || driver.first_name == our_team.drivers[0].first_name if our_team.drivers!=[]
+      
     end
+    return array1
   end
 
   def list_selectable_drivers
