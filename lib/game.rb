@@ -159,14 +159,14 @@ class Game < ActiveRecord::Base
 
 
 
-  def select_drivers_for_team 
-    prompt_user_select_first_driver
-    sleep(1)
-    list_selectable_drivers
-    select_driver
-    prompt_user_select_second_driver
-    list_selectable_drivers
-    select_driver
+  # def select_drivers_for_team 
+  #   prompt_user_select_first_driver
+  #   sleep(1)
+  #   list_selectable_drivers
+  #   select_driver
+  #   prompt_user_select_second_driver
+  #   list_selectable_drivers
+  #   select_driver
   def update_team_budget(balance)
     our_team.update(budget: balance)
   end
@@ -352,15 +352,19 @@ end
         if example == 0 
             puts "Engine Upgraded!"
             self.our_team.update(tech_factor: self.our_team.tech_factor += 0.5)
+            self.our_team.update(budget: our_team.budget -=3)
         elsif example == 1
             puts "Front Wing Upgraded!"
             self.our_team.update(tech_factor: self.our_team.tech_factor += 0.1)
+            self.our_team.update(budget: our_team.budget -=1)
         elsif example == 2 
             puts "Tyres Upgraded!"
             self.our_team.update(tech_factor: self.our_team.tech_factor += 0.2)
+            self.our_team.update(budget: our_team.budget -=1)
         elsif example == 3 
             puts "Suspension Upgraded!"
             self.our_team.update(tech_factor: self.our_team.tech_factor += 0.3)
+            self.our_team.update(budget: our_team.budget -=2)
         end 
     end 
 
@@ -377,9 +381,11 @@ end
         if example2 == 0 
             puts "Driver Upgraded!"
             our_team.drivers[0].update(skill_factor: our_team.drivers[0].skill_factor += 0.5)
+            self.our_team.update(budget: our_team.budget -=3)
         elsif example2 == 1 
             puts "Driver Upgraded!"
             our_team.drivers[1].update(skill_factor: our_team.drivers[1].skill_factor += 0.5)
+            self.our_team.update(budget: our_team.budget -=3)
         end 
     end 
 
