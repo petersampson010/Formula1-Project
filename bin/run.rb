@@ -20,7 +20,7 @@ races = game.races_in_game
 races.each do |race|
   game.create_race_results(race)
   race.show_ranking
-
+  game.show_current_standings
   game.show_standing_for_game
   game.show_constructor_standings
   game.wait_for_any_key

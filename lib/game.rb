@@ -14,7 +14,14 @@ class Game < ActiveRecord::Base
     require 'io/console'
     puts ' '
     puts 'Press any key to continue'
+    puts ''
     STDIN.getch
+  end
+
+  def show_current_standings
+    puts ''
+    puts "after this event let's have a look where we stand.."
+    wait_for_any_key
   end
 
   def points_per_position(position)
@@ -82,24 +89,24 @@ class Game < ActiveRecord::Base
   end
 
   def prompt_user_select_first_driver
-    puts `clear`
     puts 'Now its time to hire some drivers for your season!'
     puts 'Every drivers desperate to be on your books, but watch out,'
     puts 'that lottery fund of £100m will only take you so far'
     puts 'and once a drivers signed that contract hes in for the season!'
-    puts 'You have a starting budget of £100 but be carefult not to spend it all on your drivers.'
+    puts 'You have a starting budget of £100 but be careful not to spend it all on your drivers.'
     puts "You wont have anything left for spending throughout the season!"
     puts ''
   end
 
-  def prompt_user_select_second_driver
-    puts ' '
-    puts 'Great choice!'
-    puts ' '
-    puts "#{our_team.drivers[0].first_name} has been on fire pre-season."
-    puts "You have #{our_team.budget} left for your next driver:"
-    puts ' '
-  end
+  # def prompt_user_select_second_driver
+  #   puts ' '
+  #   puts 'Great choice!'
+  #   puts ' '
+  #   puts "#{our_team.drivers[0].first_name} has been on fire pre-season."
+  #   puts "You have #{our_team.budget} left for your next driver:"
+  #   puts ' '
+
+  # end
 
   # Functions
 
@@ -148,6 +155,7 @@ class Game < ActiveRecord::Base
 
   def select_driver
     prompt = TTY::Prompt.new
+    prompt_user_select_first_driver
     example = prompt.select("Please select the driver you would like to join your team", list_selectable_drivers, per_page: 16)
     selectable_drivers.each_with_index do |d, i|
       if example == list_selectable_drivers[i]
@@ -339,7 +347,7 @@ end
 
     def mid_season_changes 
         prompt = TTY::Prompt.new
-        example3 = prompt.select("Would you like to make any changes to the team? You have a budget of #{our_team.budget}", cycle:true) do |menu|
+        example3 = prompt.select("Would you like to make any changes to the team? You have a budget of £#{our_team.budget}", cycle:true) do |menu|
             menu.choice "No", 0
             menu.choice "Car", 1
             menu.choice "Drivers", 2
