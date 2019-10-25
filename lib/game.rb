@@ -87,6 +87,8 @@ class Game < ActiveRecord::Base
     puts 'Every drivers desperate to be on your books, but watch out,'
     puts 'that lottery fund of £100m will only take you so far'
     puts 'and once a drivers signed that contract hes in for the season!'
+    puts 'You have a starting budget of £100 but be carefult not to spend it all on your drivers.'
+    puts "You wont have anything left for spending throughout the season!"
     puts ''
   end
 
@@ -146,7 +148,7 @@ class Game < ActiveRecord::Base
 
   def select_driver
     prompt = TTY::Prompt.new
-    example = prompt.select("Please select the driver you would like to join your team", list_selectable_drivers)
+    example = prompt.select("Please select the driver you would like to join your team", list_selectable_drivers, per_page: 16)
     selectable_drivers.each_with_index do |d, i|
       if example == list_selectable_drivers[i]
                 our_team.pick_driver(d)
@@ -198,8 +200,8 @@ class Game < ActiveRecord::Base
       stroll.update(constructor_id: teams_needing_drivers[0].id)
       perez.update(constructor_id: teams_needing_drivers[1].id)
     else
-      stroll.update(constructor_id: teams_needing_drivers.id)
-      perez.update(constructor_id: teams_needing_drivers.id)
+      stroll.update(constructor_id: teams_needing_drivers[0].id)
+      perez.update(constructor_id: teams_needing_drivers[0].id)
     end
   end
 
@@ -288,7 +290,7 @@ class Game < ActiveRecord::Base
   end
 
   def ranked_drivers_total_points
-    drivers_total_points.sort { |a, b| a[0] <=> b[0] }.reverse
+    drivers_total_points.sort { |a, b| b[0] <=> a[0] }.reverse
     # returns an sorted (desc) array of arrays [points, driver]
   end
 
