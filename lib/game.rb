@@ -291,24 +291,36 @@ class Game < ActiveRecord::Base
 ## Team Rankings
 
 
+# def team_scoreboard
+#   puts 'Rank   | Team         | Driver      | Driver      '# | Points | Wins'
+#   game_constructors.each_with_index.map do |team, index|
+#     [index +1, team.name, team.drivers[0], team.drivers[1], '', '']
+#   end
+# end
+
 def team_scoreboard
-  game_constructors.each_with_index.map do |team, index|
-    [index +1, team.name, team.drivers[0], team.drivers[1], '', '']
+  game_constructors.map do |team|
+    [driver_total_points(team.drivers[0]) + driver_total_points(team.drivers[1]), team.name]
   end
 end
 
 def sorted_team_scoreboard
-  team_scoreboard.sort { |a, b| a[0] <=> b[0] }
+  team_scoreboard.sort { |a, b| b[0] <=> a[0] }
   # returns an array of arrays
 end
 
 def show_constructor_standings
-  puts 'Rank   | Team         | Driver      | Driver      '# | Points | Wins'
-  sorted_team_scoreboard.each_with_index do |standing, index|
-    puts "#{standing[0]} | #{standing[1]}  | #{standing[2].name}  | #{standing[3].name} | #{standing[4]}"
+  puts 'Points   | Team '
+  sorted_team_scoreboard.each do |standing|
+    puts "#{standing[0]} | #{standing[1]}"
   end
 end
 
+def show_winning_constructor
+  puts ''
+  puts "This season's winning team was #{sorted_team_scoreboard[0][1]}"
+  puts ''
+end
 
   def changes_introduction
     puts "Improving your team is vital throughout the season! Keep winning races and you'll have more to spend!"
@@ -380,13 +392,25 @@ end
     end
   end
 
+  def show_winning_constructor
+    puts ''
+    puts "This season's winning team was #{sorted_team_scoreboard[0][1]}"
+    puts ''
+  end
+
   def show_end_season_stats
     puts ' '
     a = Artii::Base.new :font => 'slant'
     puts a.asciify('Le Fin')
     puts ''
     puts 'Well, done! What an eventful season'
-    puts 'Please find our over points and standing.'
+    puts ''
+    show_winning_constructor
+    puts ''
+    show_constructor_standings
+    puts ''
+    wait_for_any_key
+    puts "Let's see how you did."
     puts ''
     puts 'Circuit   | Driver 1  Position | Driver 2 Position '
     puts '--------------------------------------'
@@ -395,7 +419,8 @@ end
     end
     puts '--------------------------------------'
     puts  "Total  | #{driver_total_points(our_team.drivers[0])} | #{driver_total_points(our_team.drivers[1])} "
-    puts  
+    puts ''
+    puts "Congrats again and see you next season!"
   end
 
 end

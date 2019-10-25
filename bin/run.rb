@@ -13,9 +13,6 @@ game.present_lineup
 game.present_teams
 game.wait_for_any_key
 
-
-
-
 # game.show_season_intro_text
 # # game.mid_season_changes
 
@@ -26,6 +23,7 @@ races.each do |race|
 
   game.show_standing_for_game
   game.show_constructor_standings
+
   #game.wait_for_any_key
   #game.mid_season_changes
 end
