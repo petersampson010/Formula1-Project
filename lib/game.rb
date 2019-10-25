@@ -1,5 +1,5 @@
-require 'pry'
 require 'tty-prompt'
+require 'artii'
 
 class Game < ActiveRecord::Base
 
@@ -16,9 +16,6 @@ class Game < ActiveRecord::Base
     puts 'Press any key to continue'
     STDIN.getch
   end
-
-  
-  # REFERENCE DATA > A TABLE??
 
   def points_per_position(position)
     case position
@@ -64,8 +61,14 @@ class Game < ActiveRecord::Base
 
   #PREPARE SEASON
 
-  def setup_game_data
-    seed_data(id)
+
+  # Output Text
+
+  def welcome_screen
+    puts `clear`
+    a = Artii::Base.new :font => 'slant'
+    puts a.asciify('FORMULA 1')
+
   end
 
   def require_team_name
@@ -76,6 +79,30 @@ class Game < ActiveRecord::Base
   def require_team_nationality
     puts 'Please enter the country your team has originated from:'
     gets.strip
+  end
+
+  def prompt_user_select_first_driver
+    puts `clear`
+    puts 'Now its time to hire some drivers for your season!'
+    puts 'Every drivers desperate to be on your books, but watch out,'
+    puts 'that lottery fund of £100m will only take you so far'
+    puts 'and once a drivers signed that contract hes in for the season!'
+    puts ''
+  end
+
+  def prompt_user_select_second_driver
+    puts ' '
+    puts 'Great choice!'
+    puts ' '
+    puts "#{our_team.drivers[0].first_name} has been on fire pre-season."
+    puts "You have #{our_team.budget} left for your next driver:"
+    puts ' '
+  end
+
+  # Functions
+
+  def setup_game_data
+    seed_data(id)
   end
 
   def create_team
@@ -114,59 +141,20 @@ class Game < ActiveRecord::Base
   end
 
   def list_selectable_drivers
-    selectable_drivers.each_with_index do |driver, index|
-      puts "#{index + 1}. #{driver.name} | Age:#{driver.age} | #{driver.nationality} | Price:#{driver.price}"
-    end
-    puts ' '
-  end
-
-  def update_team_budget(balance)
-    our_team.update(budget: balance)
+    selectable_drivers.map { |d| "Price: #{d.price} | #{d.name}" }
   end
 
   def select_driver
-    puts "Please select the number of the driver you'd like to join your team:"
-    list_num = gets.strip
-    puts ' '
-    driver = selectable_drivers[list_num.to_i - 1]
-    our_team.pick_driver(driver)
-    balance = our_team.budget - driver.price
-    update_team_budget(balance)
-  end
-
-  def prompt_user_select_first_driver
-    puts `clear`
-    puts 'Now its time to hire some drivers for your season!'
-    puts 'Every drivers desperate to be on your books, but watch out,'
-    puts 'that lottery fund of £100m will only take you so far'
-    puts 'and once a drivers signed that contract hes in for the season!'
-    puts ''
-  end
-
-  def prompt_user_select_second_driver
-    puts ' '
-    puts 'Great choice!'
-    puts ' '
-    puts "#{our_team.drivers[0].first_name} has been on fire pre-season."
-    puts "You have #{our_team.budget} left for your next driver:"
-    puts ' '
-  end
-    def testing_list_selectable_drivers 
-        selectable_drivers.map {|d| "Price: #{d.price} | #{d.first_name} #{d.second_name}"}
-    end 
-
-
-    def testing_select_driver 
-        prompt = TTY::Prompt.new
-        example = prompt.select("Please select the driver you would like to join your team", testing_list_selectable_drivers)
-        selectable_drivers.each_with_index do |d, i|
-            if example == testing_list_selectable_drivers[i]
+    prompt = TTY::Prompt.new
+    example = prompt.select("Please select the driver you would like to join your team", list_selectable_drivers)
+    selectable_drivers.each_with_index do |d, i|
+      if example == list_selectable_drivers[i]
                 our_team.pick_driver(d)
                 balance = our_team.budget - d.price
                 update_team_budget(balance)
-            end 
-        end 
+      end 
     end 
+  end 
 
 
 
@@ -179,26 +167,65 @@ class Game < ActiveRecord::Base
     prompt_user_select_second_driver
     list_selectable_drivers
     select_driver
+  def update_team_budget(balance)
+    our_team.update(budget: balance)
   end
 
-  def single_drivers
-    self.game_constructors.select {|team| team.drivers.size == 1 || team.drivers.size == 0}
+
+  # def select_drivers_for_team 
+  #   prompt_user_select_first_driver
+  #   sleep(1)
+  #   list_selectable_drivers
+  #   select_driver
+  #   prompt_user_select_second_driver
+  #   list_selectable_drivers
+  #   select_driver
+  # end
+
+  def teams_not_full_staffed
+    game_constructors.select { |team| team.drivers.size < 2 }
+    # returns an array of size 2
   end
 
-  def fill_teams 
-    stroll = Driver.find_by(second_name: "Stroll", game_id: self.id)
-    perez = Driver.find_by(second_name: "Perez", game_id: self.id)
-    teams_needing = self.single_drivers
-    teams_needing[0].drivers << stroll 
-    teams_needing[1].drivers << perez 
+  def fill_teams
+    # teams not fully staffed
+    teams_needing_drivers = teams_not_full_staffed
+    # replacement drivers
+    stroll = Driver.find_by(second_name: "Stroll", game_id: id)
+    perez = Driver.find_by(second_name: "Perez", game_id: id)
+    # fill it up
+    if teams_needing_drivers.size == 2
+      stroll.update(constructor_id: teams_needing_drivers[0].id)
+      perez.update(constructor_id: teams_needing_drivers[1].id)
+    else
+      stroll.update(constructor_id: teams_needing_drivers.id)
+      perez.update(constructor_id: teams_needing_drivers.id)
+    end
   end
 
   def present_lineup
+    puts ' '
     puts "And there it is, the lineup for '#{our_team.name}':"
     puts ' '
     puts our_team.drivers[0].name.to_s
     puts our_team.drivers[1].name.to_s
     puts ' '
+  end
+
+  def present_teams
+    puts ' '
+    puts 'The teams are ready to roll for the new season'
+    puts ' '
+    puts 'Team | Driver 1 | Driver 2 '
+    game_constructors.map do |team|
+      print "#{team.name}"
+      print " | #{team.drivers[0].name}"
+      print " | #{team.drivers[1].name}"
+      puts ''
+    end
+
+
+
   end
 
   # RUN A RACE
@@ -207,14 +234,12 @@ class Game < ActiveRecord::Base
     race.run_race(drivers_in_game)
   end
 
-
   def show_race_ranking(race)
     race.show_ranking(drivers_in_game)
   end
 
   # RUN SEASON
 
-  # prep
   def show_season_intro_text
     puts '..prepare season..'
   end
@@ -248,16 +273,15 @@ class Game < ActiveRecord::Base
     #  return total points > integer
   end
 
+  def drivers_total_points
+    drivers_in_game.map do |driver|
+      [driver_total_points(driver), driver]
+    end
+  end
+
   def driver_wins(driver)
     driver_positions_all_races(driver).select { |pos| pos == 1 }.size
     # returns an integer
-  end
-
-  def drivers_total_points
-    drivers_in_game.map do |driver|
-      [ driver_total_points(driver), driver ]
-    end
-
   end
 
   def ranked_drivers_total_points
@@ -265,34 +289,36 @@ class Game < ActiveRecord::Base
     # returns an sorted (desc) array of arrays [points, driver]
   end
 
-
   def show_standing_for_game
-    puts 'Rank | Driver | Points'
+
+    puts 'Rank | Driver | Points'# | Wins'
     ranked_drivers_total_points.each_with_index do |standing, index|
-      puts "#{index + 1} | #{standing[1].name} | #{standing[0]}"
+      puts "#{index + 1} | #{standing[1].name} | #{standing[0]} }"#| #{standing[1].wins}"
     end
     puts ' '
   end
 
+## Team Rankings
 
 
-
-
-  def run_season
-    show_intro_text
-    races = races_in_game[0..1]
-    races.each do |race|
-      create_race_results(race)
-      #show_race_result_text
-      require 'pry'
-      binding.pry
-      # puts "rankings"
-      # wait_for_any_key
-       show_current_driver_standings
-      # puts "standings"
-      #wait_for_any_key
-    end
+def team_scoreboard
+  game_constructors.each_with_index.map do |team, index|
+    [index +1, team.name, team.drivers[0], team.drivers[1], '', '']
   end
+end
+
+def sorted_team_scoreboard
+  team_scoreboard.sort { |a, b| a[0] <=> b[0] }
+  # returns an array of arrays
+end
+
+def show_constructor_standings
+  puts 'Rank   | Team         | Driver      | Driver      '# | Points | Wins'
+  sorted_team_scoreboard.each_with_index do |standing, index|
+    puts "#{standing[0]} | #{standing[1]}  | #{standing[2].name}  | #{standing[3].name} | #{standing[4]}"
+  end
+end
+
 
   def changes_introduction
     puts "Improving your team is vital throughout the season! Keep winning races and you'll have more to spend!"
@@ -322,7 +348,7 @@ class Game < ActiveRecord::Base
             menu.choice "Front Wing: £1", 1
             menu.choice "Tyres: £1", 2
             menu.choice "Suspension: £2", 3
-        end 
+        end
         if example == 0 
             puts "Engine Upgraded!"
             self.our_team.update(tech_factor: self.our_team.tech_factor += 0.5)
@@ -356,4 +382,30 @@ class Game < ActiveRecord::Base
             our_team.drivers[1].update(skill_factor: our_team.drivers[1].skill_factor += 0.5)
         end 
     end 
+
+
+  def end_season_stats
+    races_in_game.map do |race|
+      [race.circuit, FinishingPosition.all.find_by(race_id: race.id, driver_id: our_team.drivers[0].id).final_position, FinishingPosition.all.find_by(race_id: race.id, driver_id: our_team.drivers[1].id).final_position]
+    end
+  end
+
+  def show_end_season_stats
+    puts ' '
+    a = Artii::Base.new :font => 'slant'
+    puts a.asciify('Le Fin')
+    puts ''
+    puts 'Well, done! What an eventful season'
+    puts 'Please find our over points and standing.'
+    puts ''
+    puts 'Circuit   | Driver 1  Position | Driver 2 Position '
+    puts '--------------------------------------'
+    end_season_stats.each do |stat|
+      puts "#{stat[0]} | #{stat[1]} | #{stat[2]}"
+    end
+    puts '--------------------------------------'
+    puts  "Total  | #{driver_total_points(our_team.drivers[0])} | #{driver_total_points(our_team.drivers[1])} "
+    puts  
+  end
+
 end
