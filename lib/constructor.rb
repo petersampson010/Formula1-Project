@@ -9,7 +9,7 @@ class Constructor < ActiveRecord::Base
 
   def increase_techfactor(tech_points)
     self.tech_factor += tech_points
-  end
+  endh
 
 
 
