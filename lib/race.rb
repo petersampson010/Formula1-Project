@@ -8,8 +8,8 @@ class Race < ActiveRecord::Base
   def determine_race_score(driver)
     # creates a race score for a driver
     skill = driver.skill_factor
-    technology = 1 #   driver.constructor.tech_factor
-    rand #     * 10 * skill * technology
+    technology = driver.constructor.tech_factor
+    rand * 10 * skill * technology
     # returns an integer > score
   end
 
