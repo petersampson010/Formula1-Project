@@ -21,7 +21,7 @@ class Race < ActiveRecord::Base
 
   def sort_scorecards(drivers)
     # gets racescore for drivers and sorts them
-    get_scorecards(drivers).sort { |a, b| a[0] <=> b[0] }
+    get_scorecards(drivers).sort { |a, b| b[0] <=> a[0] }
     # returns an sorted array of arrays > [score, driver instance]
   end
 

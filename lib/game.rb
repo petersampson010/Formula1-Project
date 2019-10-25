@@ -290,7 +290,7 @@ class Game < ActiveRecord::Base
   end
 
   def ranked_drivers_total_points
-    drivers_total_points.sort { |a, b| b[0] <=> a[0] }.reverse
+    drivers_total_points.sort { |a, b| a[0] <=> b[0] }.reverse
     # returns an sorted (desc) array of arrays [points, driver]
   end
 
