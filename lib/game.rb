@@ -318,7 +318,7 @@ end
 
 def show_constructor_standings
   puts 'Points | Team  '
-  puts '-----------------------
+  puts '-----------------------'
   sorted_team_scoreboard.each do |standing|
     puts "#{standing[0]} | #{standing[1]}"
   end
