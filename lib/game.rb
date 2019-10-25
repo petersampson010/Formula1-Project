@@ -337,7 +337,7 @@ end
 
     def mid_season_changes 
         prompt = TTY::Prompt.new
-        example3 = prompt.select("Would you like to make any changes to the team?", cycle:true) do |menu|
+        example3 = prompt.select("Would you like to make any changes to the team? You have a budget of #{our_team.budget}", cycle:true) do |menu|
             menu.choice "No", 0
             menu.choice "Car", 1
             menu.choice "Drivers", 2
