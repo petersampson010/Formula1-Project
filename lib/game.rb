@@ -113,7 +113,7 @@ class Game < ActiveRecord::Base
       nationality: team_nationality,
       tech_factor: 4.0,
       budget: 100,
-      game_id: id
+      game_id: self.id
     )
     self.users_team = team_name
     @our_team_id = our_team.id
@@ -157,6 +157,16 @@ class Game < ActiveRecord::Base
   end 
 
 
+
+
+  # def select_drivers_for_team 
+  #   prompt_user_select_first_driver
+  #   sleep(1)
+  #   list_selectable_drivers
+  #   select_driver
+  #   prompt_user_select_second_driver
+  #   list_selectable_drivers
+  #   select_driver
   def update_team_budget(balance)
     our_team.update(budget: balance)
   end
@@ -352,17 +362,37 @@ end
             menu.choice "Suspension: £2", 3
         end
         if example == 0 
+          if our_team.budget >= 3
             puts "Engine Upgraded!"
-            self.our_team.tech_factor += 0.5
+            self.our_team.update(tech_factor: self.our_team.tech_factor += 0.5)
+            self.our_team.update(budget: our_team.budget -=3)
+          else 
+            puts "You cant afford this! you only have £#{our_team.budget} left"
+          end 
         elsif example == 1
+          if our_team.budget >= 1
             puts "Front Wing Upgraded!"
-            self.our_team.tech_factor += 0.2
+            self.our_team.update(tech_factor: self.our_team.tech_factor += 0.1)
+            self.our_team.update(budget: our_team.budget -=1)
+          else 
+            puts "You cant afford this! you only have £#{our_team.budget} left"
+          end 
         elsif example == 2 
+          if our_team.budget >= 1
             puts "Tyres Upgraded!"
-            self.our_team.tech_factor += 0.2
+            self.our_team.update(tech_factor: self.our_team.tech_factor += 0.2)
+            self.our_team.update(budget: our_team.budget -=1)
+          else 
+            puts "You cant afford this! you only have £#{our_team.budget} left"
+          end 
         elsif example == 3 
+          if our_team.budget >= 2
             puts "Suspension Upgraded!"
-            self.our_team.tech_factor += 0.3
+            self.our_team.update(tech_factor: self.our_team.tech_factor += 0.3)
+            self.our_team.update(budget: our_team.budget -=2)
+          else 
+            puts "You cant afford this! you only have £#{our_team.budget} left"
+          end 
         end 
     end 
 
@@ -376,12 +406,22 @@ end
             menu.choice "#{self.drivers_names[0]}", 0
             menu.choice "#{self.drivers_names[1]}", 1
         end 
-        if example2 == 0 
+        if example2 == 0
+          if our_team.budget >= 3
             puts "Driver Upgraded!"
-            self.our_team.drivers[0].skill_factor += 3
+            our_team.drivers[0].update(skill_factor: our_team.drivers[0].skill_factor += 0.5)
+            self.our_team.update(budget: our_team.budget -=3)
+          else 
+            puts "You cant afford this! you only have £#{our_team.budget} left"
+          end 
         elsif example2 == 1 
+          if our_team.budget >= 3
             puts "Driver Upgraded!"
-            self.our_team.drivers[1].skill_factor += 3 
+            our_team.drivers[1].update(skill_factor: our_team.drivers[1].skill_factor += 0.5)
+            self.our_team.update(budget: our_team.budget -=3)
+          else 
+            puts "You cant afford this! you only have £#{our_team.budget} left"
+          end 
         end 
     end 
 
